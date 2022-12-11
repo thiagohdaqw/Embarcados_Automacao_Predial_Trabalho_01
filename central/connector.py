@@ -10,29 +10,37 @@ class MessageType(Enum):
     DIRECT = 0
     BROADCAST = 1
 
-Address = namedtuple('Address', 'ip port')
+Address = namedtuple('Address', 'host port')
 MessageQueue = Queue[tuple[MessageType, bytes]]
 ReadableHandler = Callable[[bytes, MessageQueue], None]
 
 class DistributedServerConnector:
     
-    clients: set[socket]
+    clients: dict[Address, socket]
+
+    inputs: set[socket]
     outputs: set[socket]
 
     readable_funcs = List[ReadableHandler]
 
     message_queues: dict[socket, MessageQueue]
 
-    def __init__(self):
-        self.clients = set()
+    timeout: float
+
+    def __init__(self, timeout = 5.0):
+        self.clients = {}
         self.outputs = set()
+        self.inputs = set()
         self.readable_funcs = []
         self.writeable_funcs = []
         self.message_queues = {}
+        self.timeout = timeout
 
     def serve(self):
         while True:
-            readables, writeables, _ = select.select(self.clients, self.outputs, [])
+            self.reconnect()
+
+            readables, writeables, _ = select.select(self.inputs, self.outputs, [], self.timeout)
 
             for r in readables:
                 self._manage_readable_event(r)
@@ -58,43 +66,49 @@ class DistributedServerConnector:
         conn.sendall(message)
 
     def send_broadcast_message(self, message: bytes):
-        for conn in self.clients:
+        for conn in self.inputs:
             conn.sendall(message)
 
     def register_readable_handler(self, func: ReadableHandler):
         self.readable_funcs.append(func)
 
+    def reconnect(self):
+        disconnecteds = filter(lambda i: i[1] not in self.inputs, self.clients.items())
+
+        for address, _ in disconnecteds:
+            self.connect(address)
+
     def connect(self, address: Address):
         client_socket = socket(AF_INET, SOCK_STREAM)
+        self.clients[address] = client_socket
         
-        for _ in range(10):
-            try:
-                print(f"[{address}]: Tentando se conectar")
+        try:
+            print(f"[{address}]: Tentando se conectar")
 
-                client_socket.connect(address)
-                client_socket.setblocking(False)
+            client_socket.connect(address)
+            client_socket.setblocking(False)
 
-                self.clients.add(client_socket)
-                self.message_queues[client_socket] = Queue()
-                
-                print(f"[{address}]: Conexão estabelecida com sucesso")
-                return
-            except OSError:
-                print(f"[{address}]: Falha em estabelecer conexão. Tentando novamente em 5 segundos...")
-                time.sleep(5)
-
-        print(f"[{address}]: Tentativas maxima de conexão alcançada")
-        client_socket.close()
+            self.inputs.add(client_socket)
+            self.message_queues[client_socket] = Queue()
+            
+            print(f"[{address}]: Conexão estabelecida com sucesso")
+            return
+        except OSError:
+            print(f"[{address}]: Falha em estabelecer conexão")
 
     def disconnect(self, conn: socket):
-        if conn in self.clients:
-            self.clients.remove(conn)
+        if conn in self.inputs:
+            self.inputs.remove(conn)
         if conn in self.outputs:
             self.outputs.remove(conn)
         if conn in self.message_queues:
             del self.message_queues[conn]
-        print(f"[{Address(*conn.getsockname())}]: Desconectado")
-        conn.close()
+
+        for address, connection in self.clients.items():
+            if connection == conn:
+                connection.close()
+                print(f"[{address}]: Desconectado")
+                return
 
     def _manage_readable_event(self, conn: socket):
         data = conn.recv(500)
@@ -105,3 +119,6 @@ class DistributedServerConnector:
         
         for func in self.readable_funcs:
             func(data, self.message_queues[conn])
+
+        if not self.message_queues[conn].empty():
+            self.outputs.add(conn)
