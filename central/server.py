@@ -2,9 +2,8 @@ import select
 import threading
 import util
 from enum import Enum
-from queue import Queue
 from typing import List, Callable
-from collections import namedtuple
+from collections import namedtuple, deque
 from socket import AF_INET, SO_REUSEADDR, SOCK_STREAM, SOL_SOCKET, socket
 
 
@@ -18,7 +17,7 @@ class HttpMethod(Enum):
 
 
 Address = namedtuple('Address', 'host port')
-MessageQueue = Queue[tuple[MessageType, bytes]]
+MessageQueue = deque[tuple[MessageType, bytes]]
 
 ReadableHandler = Callable[[bytes, MessageQueue], None]
 HttpHandler = Callable[[str], bytes]
@@ -66,24 +65,25 @@ class Server:
                 self.send_message(w)
 
     def send_message(self, conn: socket):
-        if self.message_queues[conn].empty():
+        if len(self.message_queues[conn]) == 0:
             return
 
-        type, message = self.message_queues[conn].get_nowait()
+        type, message = self.message_queues[conn].popleft()
 
         if type == MessageType.DIRECT:
             self.send_direct_message(conn, message)
         if type == MessageType.BROADCAST:
             self.send_broadcast_message(message)
 
-        if self.message_queues[conn].empty():
+        if len(self.message_queues[conn]) == 0:
             self.outputs.remove(conn)
 
     def send_direct_message(self, conn: socket, message: bytes):
         conn.sendall(message)
 
     def send_broadcast_message(self, message: bytes):
-        for conn in self.inputs:
+        clients = filter(lambda c: c != self.server, self.inputs)
+        for conn in clients:
             self.send_direct_message(conn, message)
 
     def register_readable_handler(self, func: ReadableHandler):
@@ -111,12 +111,11 @@ class Server:
             client_socket.setblocking(False)
 
             self.inputs.add(client_socket)
-            self.message_queues[client_socket] = Queue()
+            self.message_queues[client_socket] = deque()
 
             util.logger(address, "Conexão estabelecida com sucesso")
         except OSError:
             util.logger(address, "Falha em estabelecer conexão")
-            client_socket.close()
 
     def disconnect(self, conn: socket):
         if conn in self.inputs:
@@ -146,7 +145,7 @@ class Server:
         for func in self.readable_funcs:
             func(data, self.message_queues[conn])
 
-        if not self.message_queues[conn].empty():
+        if len(self.message_queues[conn]) > 0:
             self.outputs.add(conn)
 
     def _manage_server_readable_event(self):
