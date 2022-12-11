@@ -1,7 +1,4 @@
-from connector import MessageQueue, Message
-from socket import socket
+from connector import MessageQueue, MessageType
 
-def handler_func(conn: socket, queue: MessageQueue):
-    msg = conn.recv(500)
-
-    queue.put((Message.BROADCAST, msg))
+def handler_func(data: bytes, queue: MessageQueue):
+    queue.put((MessageType.BROADCAST, data))
