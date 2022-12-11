@@ -46,7 +46,6 @@ class Server:
         self.outputs = set()
         self.inputs = set()
         self.readable_funcs = []
-        self.writeable_funcs = []
         self.message_queues = {}
         self.http_funcs = {}
         self.timeout = timeout
@@ -85,7 +84,7 @@ class Server:
 
     def send_broadcast_message(self, message: bytes):
         for conn in self.inputs:
-            conn.sendall(message)
+            self.send_direct_message(conn, message)
 
     def register_readable_handler(self, func: ReadableHandler):
         self.readable_funcs.append(func)
@@ -95,7 +94,8 @@ class Server:
 
     def reconnect(self):
         disconnecteds = filter(
-            lambda i: i[1] not in self.inputs, self.clients.items())
+            lambda i: i[1] not in self.inputs,
+            self.clients.items())
 
         for address, _ in disconnecteds:
             self.connect(address)
@@ -114,9 +114,9 @@ class Server:
             self.message_queues[client_socket] = Queue()
 
             util.logger(address, "Conexão estabelecida com sucesso")
-            return
         except OSError:
             util.logger(address, "Falha em estabelecer conexão")
+            client_socket.close()
 
     def disconnect(self, conn: socket):
         if conn in self.inputs:
@@ -154,7 +154,8 @@ class Server:
 
         util.logger(Address(*addr), "Nova conexão")
 
-        threading.Thread(target=self._handle_http_connection, args=(conn,)).start()
+        threading.Thread(target=self._handle_http_connection,
+                         args=(conn,)).start()
 
     def _handle_http_connection(self, conn: socket):
         with conn:
@@ -180,4 +181,5 @@ class Server:
 
         self.inputs.add(self.server)
 
-        util.logger(address, f'\033[0;33mServidor Central Web\033[0m aguardando conexões em: \033[0;32mhttp://{address.host}:{address.port}/\033[0m')
+        util.logger(address,
+                    f'\033[0;33mServidor Central Web\033[0m aguardando conexões em: \033[0;32mhttp://{address.host}:{address.port}/\033[0m')
