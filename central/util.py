@@ -6,4 +6,4 @@ def read_json(file, dir = os.getcwd()):
         return json.load(f)
 
 def logger(address, msg):
-    print(f'[{address}]:', msg)
+    print(f'[{address.host}, {address.port}]:', msg)

@@ -180,4 +180,4 @@ class Server:
 
         self.inputs.add(self.server)
 
-        util.logger(address, 'Servidor Central aguardando conexões...')
+        util.logger(address, f'\033[0;33mServidor Central Web\033[0m aguardando conexões em: \033[0;32mhttp://{address.host}:{address.port}/\033[0m')
