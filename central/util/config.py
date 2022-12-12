@@ -1,5 +1,5 @@
 import sys
-from . import util
+from . import json
 
 
 def get_config():
@@ -8,4 +8,4 @@ def get_config():
               sys.argv[0], "central_config_json_file")
         sys.exit(1)
 
-    return util.read_json(sys.argv[1])
+    return json.read_json(sys.argv[1])

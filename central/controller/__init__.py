@@ -1,4 +1,4 @@
-from . import report, router, http
+from . import report, router, http, distributed_server
 
 def init(app: router.HttpRouter):
     app.register_route(router.HttpMethod.GET, '/api/report', report.get_current_report)

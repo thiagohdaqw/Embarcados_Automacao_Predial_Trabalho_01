@@ -1,10 +1,12 @@
 import select
 import threading
+import logging
+
 from enum import Enum
-from ..util import util
+from socket import socket
+from collections import deque
 from typing import List, Callable
-from collections import namedtuple, deque
-from socket import AF_INET, SO_REUSEADDR, SOCK_STREAM, SOL_SOCKET, socket
+from central.server.socket import Address, create_server_socket
 
 
 class MessageType(Enum):
@@ -12,22 +14,12 @@ class MessageType(Enum):
     BROADCAST = 1
 
 
-Address = namedtuple('Address', 'host port')
 MessageQueue = deque[tuple[MessageType, bytes]]
-
 
 ReadableHandler = Callable[[bytes, MessageQueue], None]
 HttpHandler = Callable[[bytes], bytes]
 
-
-def create_server_socket(address: Address) -> socket:
-    server = socket(AF_INET, SOCK_STREAM)
-    server.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-    server.bind(address)
-    server.setblocking(False)
-    server.listen(10)
-    return server
-
+logger = logging.getLogger('console')
 
 class Server:
 
@@ -55,10 +47,12 @@ class Server:
         self.inputs.add(self.server_central)
         self.inputs.add(self.server_web)
 
-        util.logger(server_web,
-                    f'\033[0;33mServidor Central\033[0m aguardando conexões em: \033[0;32m{server_central.host}:{server_central.port}\033[0m')
-        util.logger(server_web,
-                    f'\033[0;33mServidor Web\033[0m aguardando conexões em: \033[0;32mhttp://{server_web.host}:{server_web.port}/\033[0m')
+        logger.info(
+                    f'\033[0;33mServidor Central\033[0m aguardando conexões em: \033[0;32m{server_central.host}:{server_central.port}\033[0m',
+                    extra={'conn': server_central})
+        logger.info(
+                    f'\033[0;33mServidor Web\033[0m aguardando conexões em: \033[0;32mhttp://{server_web.host}:{server_web.port}/\033[0m',
+                    extra={'conn': server_central})
 
     def serve(self):
         while True:
@@ -89,7 +83,8 @@ class Server:
         conn.sendall(message)
 
     def send_broadcast_message(self, message: bytes):
-        clients = filter(lambda c: c != self.server_central and c != self.server_web, self.inputs)
+        clients = filter(lambda c: c != self.server_central and c !=
+                         self.server_web, self.inputs)
         for conn in clients:
             self.send_direct_message(conn, message)
 
@@ -107,7 +102,7 @@ class Server:
         if conn in self.message_queues:
             del self.message_queues[conn]
 
-        util.logger(Address(*conn.getsockname()), "Desconectado")
+        logger.info("Fechando conexão", extra={'conn': Address(*conn.getsockname())})
 
     def _manage_readable_event(self, conn: socket):
         if conn is self.server_web:
@@ -135,7 +130,7 @@ class Server:
     def _manage_server_central_readable_event(self):
         conn, addr = self.server_central.accept()
 
-        util.logger(Address(*addr), "Nova conexão de Servidor Distribuido")
+        logger.info("Nova conexão de Servidor Distribuido", extra={'conn': Address(*addr)})
 
         self.inputs.add(conn)
         self.message_queues[conn] = deque()
@@ -143,7 +138,7 @@ class Server:
     def _manage_server_web_readable_event(self):
         conn, addr = self.server_web.accept()
 
-        util.logger(Address(*addr), "Nova conexão Web")
+        logger.info("Nova conexão Web", extra={'conn': Address(*addr)})
 
         threading.Thread(target=self._handle_http_connection,
                          args=(conn,)).start()
