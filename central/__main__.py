@@ -1,25 +1,31 @@
-import config
-from server import Address, Server, HttpMethod
-import handler
-import web
+import sys
+import central.controller as controller
+from .util import config
+from .server.server import Address, Server
+import central.handler as handler
 
+sys.path.append('.')
 
 def main():
-    central_config, room_configs = config.get_configs()
+    central_config = config.get_config()
 
     server = Server(
-        server_address=Address(
+        server_central=Address(
             central_config['ip_servidor_central'],
-            central_config['porta_servidor_central']
-        ))
+            central_config['porta_servidor_central'],
+        ),
+        server_web=Address(
+            central_config['ip_servidor_web'],
+            central_config['porta_servidor_web'],
+        )
+    )
+
+    web_router = controller.router.HttpRouter(server)
+
+    controller.init(web_router)
 
     server.register_readable_handler(handler.handler_func)
-    server.register_http_handler(HttpMethod.GET, web.handle_get_method)
-
-    for room in room_configs:
-        address = Address(room['ip_servidor_distribuido'],
-                          room['porta_servidor_distribuido'])
-        server.connect(address)
+    server.register_http_handler(web_router.handle_http_message)
 
     server.serve()
 

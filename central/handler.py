@@ -1,4 +1,4 @@
-from server import MessageQueue, MessageType
+from central.server.server import MessageQueue, MessageType
 
 
 def handler_func(data: bytes, queue: MessageQueue):

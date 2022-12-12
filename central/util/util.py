@@ -8,4 +8,5 @@ def read_json(file, dir=os.getcwd()):
 
 
 def logger(address, msg):
+    # TODO: use logging module
     print(f'[{address.host}, {address.port}]:', msg)

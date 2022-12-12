@@ -1,31 +1,27 @@
-import re
 import os
-import json
+import re
 import pathlib
 import mimetypes
+from enum import Enum
 
-PAGES_PATH = pathlib.Path(os.path.dirname(__file__)) / 'pages/'
+
+PAGES_PATH = pathlib.Path(os.path.dirname(__file__)) / '../assets/'
 ROOT_PAGE = 'index.html'
 VALIDATION_REGEX = r'[a-z]+\.(css|html|js|json)'
 
 
-def handle_get_method(data: str) -> bytes:
-    _, filename, *_ = data.split(' ', 3)
+class HttpMethod(Enum):
+    GET = 'GET'
+    POST = 'POST'
 
-    filename = ROOT_PAGE if filename == '/' else filename[1:]
 
-    if filename in DYNAMIC_ROUTES:
-        return DYNAMIC_ROUTES[filename]()
+def handle_http_get_static_file(resource: str) -> bytes:
+    filename = ROOT_PAGE if resource == '/' else resource[1:]
 
     if not validate_filename(filename):
         return build_error_response()
 
     return build_response_from_file(filename)
-
-
-def build_report_json():
-    body = b'{"ola": 1}\n'
-    return build_response(body, b'application/json')
 
 
 def build_error_response():
@@ -45,7 +41,7 @@ def build_response(body: bytes, contentType=b'text/html', status_code=b'200'):
     response += b'Content-Type: ' + contentType + b'; charset=utf-8\n'
     response += b'Connection: Closed\n\n'
     response += body
-    return response
+    return response + b'\n'
 
 
 def validate_filename(filename):
@@ -56,8 +52,3 @@ def validate_filename(filename):
         return False
 
     return True
-
-
-DYNAMIC_ROUTES = {
-    'report.json': build_report_json
-}
