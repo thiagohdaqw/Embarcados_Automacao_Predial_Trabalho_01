@@ -33,6 +33,14 @@ function loadReport() {
 function fillGeneralData(generalData) {
     document.getElementById('general-temperature').textContent = `${generalData.temperature}ºC`;
     document.getElementById('general-alarm-system').textContent = getOnOffText(generalData.alarmSystem);
+    document.getElementById('general-alarm').textContent = getOnOffText(generalData.alarm);
+
+    const alarmContainer = document.getElementById('alarm-container');
+    if (generalData.alarm) {
+        alarmContainer.classList.add('alarm-animation');
+    } else {
+        alarmContainer.classList.remove('alarm-animation');
+    }
 }
 
 function fillRoomsData(roomsData) {
@@ -52,7 +60,6 @@ function roomsComparator(a, b) {
 }
 
 function getRoomHtml(room) {
-    console.log(room);
     return `
         <div class="card-container text-center">
             <h1>${room.name}</h1>

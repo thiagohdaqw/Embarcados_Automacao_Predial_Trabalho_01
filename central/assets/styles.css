@@ -106,3 +106,26 @@ h3 {
     justify-content: center;
     display: flex;
 }
+
+.alarm-animation {
+    animation-name: alarm-cycle;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes alarm-cycle {
+    0% {
+        background-color: red;
+        box-shadow: 2px 2px 15px 5px red;
+    }
+
+    50% {
+        background-color: blue;
+        box-shadow: 2px 2px 15px 5px blue;
+    }
+
+    100% {
+        background-color: red;
+        box-shadow: 2px 2px 15px 5px red;
+    }
+}

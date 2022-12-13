@@ -1,3 +1,4 @@
+import random
 from .http import build_json_response
 
 def get_current_report(request: str) -> bytes:
@@ -5,7 +6,7 @@ def get_current_report(request: str) -> bytes:
         'general': {
             'temperature': 25.6,
             'alarmSystem': True,
-            'alarm': False,
+            'alarm': bool(random.randint(0, 1)),
         },
         'rooms': [
             {
