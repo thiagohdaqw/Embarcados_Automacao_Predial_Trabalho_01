@@ -32,6 +32,7 @@ function loadReport() {
 
 function fillGeneralData(generalData) {
     document.getElementById('general-temperature').textContent = `${generalData.temperature}ºC`;
+    document.getElementById('general-humidity').textContent = `${generalData.humidity}%`;
     document.getElementById('general-alarm-system').textContent = getOnOffText(generalData.alarmSystem);
     document.getElementById('general-alarm').textContent = getOnOffText(generalData.alarm);
 
@@ -62,17 +63,17 @@ function roomsComparator(a, b) {
 function getRoomHtml(room) {
     return `
         <div class="card-container text-center">
-            <h1>${room.name}</h1>
+            <h1>${room.name} - (${room.online ? 'online' : 'offline'})</h1>
             <div class="card-elem-container">
-                <div class="card-elem">
-                    <div class="card-elem-title">Status</div>
-                    <img class="icon" src="icons/${room.online ? 'online' : 'offline'}.png">
-                    <p>${room.online ? 'Online' : 'Offline'}</p>
-                </div>
                 <div class="card-elem">
                     <div class="card-elem-title">Temperatura</div>
                     <img class="icon" src="icons/temperature.png">
                     <p>${room.temperature}ºC</p>
+                </div>
+                <div class="card-elem">
+                    <div class="card-elem-title">Humidade</div>
+                    <img class="icon" src="icons/humidity.png">
+                    <p>${room.humidity}%</p>
                 </div>
                 <div class="card-elem">
                     <div class="card-elem-title">Pessoas</div>

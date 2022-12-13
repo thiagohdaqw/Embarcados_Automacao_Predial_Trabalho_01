@@ -5,6 +5,7 @@ def get_current_report(request: str) -> bytes:
     response = {
         'general': {
             'temperature': 25.6,
+            'humidity': 50,
             'alarmSystem': True,
             'alarm': bool(random.randint(0, 1)),
         },
@@ -13,6 +14,7 @@ def get_current_report(request: str) -> bytes:
                 'name': 'Sala 01',
                 'persons': 10,
                 'temperature': 25.1,
+                'humidity': 80,
                 'smoke': True,
                 'lamp01': True,
                 'lamp02': False,
@@ -26,6 +28,7 @@ def get_current_report(request: str) -> bytes:
                 'name': 'Sala 02',
                 'persons': 10,
                 'temperature': 26,
+                'humidity': 50,
                 'smoke': True,
                 'lamp01': True,
                 'lamp02': False,
@@ -39,6 +42,7 @@ def get_current_report(request: str) -> bytes:
                 'name': 'Sala 03',
                 'persons': 10,
                 'temperature': 26,
+                'humidity': 50,
                 'smoke': True,
                 'lamp01': True,
                 'lamp02': False,
