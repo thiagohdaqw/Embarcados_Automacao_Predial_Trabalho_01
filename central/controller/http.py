@@ -39,6 +39,7 @@ def build_response_from_file(filename, status_code=b'200'):
 def build_response(body: bytes, contentType=b'text/html', status_code=b'200'):
     response = b'HTTP/1.1 ' + status_code + b'\n'
     response += b'Content-Type: ' + contentType + b'; charset=utf-8\n'
+    response += b'Access-Control-Allow-Origin: *\n'
     response += b'Connection: Closed\n\n'
     response += body
     return response + b'\n'
