@@ -15,8 +15,6 @@ class HttpRouter:
         self.routes = {}
         self.server = server
 
-        self.register_route(HttpMethod.GET, '*', handle_http_get_static_file)
-
     def register_route(self, method: HttpMethod, path: str, callback: HttpHandler):
         self.routes[(method.value, path)] = callback
 
@@ -26,4 +24,4 @@ class HttpRouter:
         if (method, resource) in self.routes:
             return self.routes[(method, resource)](request)
 
-        return self.routes[(HttpMethod.GET.value, '*')](resource)
+        return handle_http_get_static_file(resource)
