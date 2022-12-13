@@ -21,6 +21,7 @@ HttpHandler = Callable[[bytes], bytes]
 
 logger = logging.getLogger('console')
 
+
 class Server:
 
     server_central: socket
@@ -48,11 +49,11 @@ class Server:
         self.inputs.add(self.server_web)
 
         logger.info(
-                    f'\033[0;33mServidor Central\033[0m aguardando conexões em: \033[0;32m{server_central.host}:{server_central.port}\033[0m',
-                    extra={'conn': server_central})
+            f'\033[0;33mServidor Central\033[0m aguardando conexões em: \033[0;32m{server_central.host}:{server_central.port}\033[0m',
+            extra={'conn': server_central})
         logger.info(
-                    f'\033[0;33mServidor Web\033[0m aguardando conexões em: \033[0;32mhttp://{server_web.host}:{server_web.port}/\033[0m',
-                    extra={'conn': server_central})
+            f'\033[0;33mServidor Web\033[0m aguardando conexões em: \033[0;32mhttp://{server_web.host}:{server_web.port}/\033[0m',
+            extra={'conn': server_web})
 
     def serve(self):
         while True:
@@ -102,7 +103,8 @@ class Server:
         if conn in self.message_queues:
             del self.message_queues[conn]
 
-        logger.info("Fechando conexão", extra={'conn': Address(*conn.getsockname())})
+        logger.info("Fechando conexão", extra={
+                    'conn': Address(*conn.getsockname())})
 
     def _manage_readable_event(self, conn: socket):
         if conn is self.server_web:
@@ -130,7 +132,8 @@ class Server:
     def _manage_server_central_readable_event(self):
         conn, addr = self.server_central.accept()
 
-        logger.info("Nova conexão de Servidor Distribuido", extra={'conn': Address(*addr)})
+        logger.info("Nova conexão de Servidor Distribuido",
+                    extra={'conn': Address(*addr)})
 
         self.inputs.add(conn)
         self.message_queues[conn] = deque()
