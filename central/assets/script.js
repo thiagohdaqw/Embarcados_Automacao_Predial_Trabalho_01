@@ -22,7 +22,7 @@ function runReportPolling() {
 }
 
 function loadReport() {
-    fetch('http://localhost:10720/api/reports')
+    fetch('/api/reports')
         .then(r => r.json())
         .then(data => {
             fillGeneralData(data.general);
@@ -58,43 +58,53 @@ function getRoomHtml(room) {
             <h1>${room.name}</h1>
             <div class="card-elem-container">
                 <div class="card-elem">
-                    <img class="icon" src="temperature.png">
+                    <div class="card-elem-title">Status</div>
+                    <img class="icon" src="icons/${room.online ? 'online' : 'offline'}.png">
                     <p>${room.online ? 'Online' : 'Offline'}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="temperature.png">
+                    <div class="card-elem-title">Temperatura</div>
+                    <img class="icon" src="icons/temperature.png">
                     <p>${room.temperature}ºC</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Pessoas</div>
+                    <img class="icon" src="icons/persons.png">
                     <p>${room.persons}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Fumaça</div>
+                    <img class="icon" src="icons/smoke.png">
                     <p>${getOnOffText(room.smoke)}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Projetor</div>
+                    <img class="icon" src="icons/projector.png">
                     <p>${getOnOffText(room.projector)}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Ar-condicionado</div>
+                    <img class="icon" src="icons/ice.png">
                     <p>${getOnOffText(room.airConditioning)}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Presença</div>
+                    <img class="icon" src="icons/presence.png">
                     <p>${getOnOffText(room.presence)}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
-                    <p>${getOnOffText(room.window)}</p>
+                    <div class="card-elem-title">Janela</div>
+                    <img class="icon" src="icons/window.png">
+                    <p>${room.window ? 'Aberta' : 'Fechada'}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Lâmpada 01</div>
+                    <img class="icon" src="icons/lamp.png">
                     <p>${getOnOffText(room.lamp01)}</p>
                 </div>
                 <div class="card-elem">
-                    <img class="icon" src="alarm.png">
+                    <div class="card-elem-title">Lâmpada 02</div>
+                    <img class="icon" src="icons/lamp.png">
                     <p>${getOnOffText(room.lamp02)}</p>
                 </div>
             </div>

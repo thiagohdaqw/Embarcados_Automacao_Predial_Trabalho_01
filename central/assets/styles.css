@@ -91,6 +91,13 @@ h3 {
     background-color: azure;
 }
 
+.card-elem-title {
+    font-weight: 600;
+    font-size: large;
+    margin-bottom: 10px;
+    color: black;
+}
+
 .icon {
     width: 100px;
 }
