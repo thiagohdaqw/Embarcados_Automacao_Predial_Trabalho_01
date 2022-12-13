@@ -8,7 +8,7 @@ from enum import Enum
 
 PAGES_PATH = pathlib.Path(os.path.dirname(__file__)) / '../assets/'
 ROOT_PAGE = 'index.html'
-VALIDATION_REGEX = r'[a-z]+\.(css|html|js|json|png)'
+VALIDATION_REGEX = r'([a-z]+/?)+\.(css|html|js|json|png)'
 
 
 class HttpMethod(Enum):
