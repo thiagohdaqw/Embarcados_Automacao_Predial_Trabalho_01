@@ -1,5 +1,43 @@
 <html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-    <h1>Hello world</h1>
+
+    <div class="card-container text-center">
+        <h1>Trabalho 1 - Fundamentos de Sistemas Embarcados</h1>
+        <h3 id="central-server-header">Servidor Central Web</h3>
+        <div class="refresh-rate-container">
+            <p class="refresh-rate-label">Taxa de atualização da página:</p>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(0.1)">0.1</input>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(0.2)">0.2</input>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(0.4)">0.4</input>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(0.8)">0.8</input>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(1)">1</input>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(2)">2</input>
+            <input type="radio" name="refresh-rate" class="refresh-rate-input" onclick="setRefreshRate(5)">5</input>
+            <input type="number" name="refresh-rate" id="refresh-rate-input" min="0.01" max="10" value="30" step="0.5" onchange="runReportPolling()"> segundos
+        </div>
+    </div>
+
+    <div class="card-container text-center">
+        <h1>Geral</h1>
+        <div>
+            <div class="general-container">
+                <div class="card-elem">
+                    <img class="icon" src="temperature.png">
+                    <p id="general-temperature">25ºC</p>
+                </div>
+                <div class="card-elem">
+                    <img class="icon" src="alarm.png">
+                    <p id="general-alarm-system">Ligado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rooms"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>

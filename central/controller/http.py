@@ -2,12 +2,13 @@ import os
 import re
 import pathlib
 import mimetypes
+import json
 from enum import Enum
 
 
 PAGES_PATH = pathlib.Path(os.path.dirname(__file__)) / '../assets/'
 ROOT_PAGE = 'index.html'
-VALIDATION_REGEX = r'[a-z]+\.(css|html|js|json)'
+VALIDATION_REGEX = r'[a-z]+\.(css|html|js|json|png)'
 
 
 class HttpMethod(Enum):
@@ -35,6 +36,9 @@ def build_response_from_file(filename, status_code=b'200'):
     with open(path, 'rb') as file:
         return build_response(file.read(), contentType=contentType.encode('utf-8'), status_code=status_code)
 
+def build_json_response(data):
+    body = json.dumps(data).encode('utf-8')
+    return build_response(body, contentType=b'application/json')
 
 def build_response(body: bytes, contentType=b'text/html', status_code=b'200'):
     response = b'HTTP/1.1 ' + status_code + b'\n'

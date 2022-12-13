@@ -1,0 +1,101 @@
+body {
+    background-color: #b0e0e6;
+    font-family: 'sans-serif';
+}
+
+h1 {
+    color: #E64067;
+    margin: 0.5rem;
+    text-shadow: 1px 1px;
+}
+
+h3 {
+    color: #FCA63A;
+}
+
+.card-container {
+    box-shadow: 5px 5px 5px rgb(135 134 134 / 49%);
+    border-radius: .5rem;
+    background-color: white;
+    margin: 2rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.refresh-rate-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-rate-input {
+    margin-left: 0.5rem;
+}
+
+#refresh-rate-input {
+    text-align: center;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 5px;
+}
+
+.general-container {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.card-elem-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    font-weight: 500;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+@media (max-width: 1160px) {
+    .card-elem-container {
+        grid-template-columns: auto auto auto auto;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 780px) {
+    .card-elem-container {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .card-elem-container {
+        grid-template-columns: auto auto;
+    }
+
+    .refresh-rate-container {
+        flex-direction: column;
+    }
+}
+
+.card-elem {
+    border: 3px solid #87cefa94;
+    padding: 10px;
+    box-shadow: 1px 1px 10px #2f82ffc9;
+}
+
+.card-elem:hover {
+    box-shadow: 2px 2px 15px 5px #2ff8ffc9;
+    background-color: azure;
+}
+
+.icon {
+    width: 100px;
+}
+
+.row {
+    justify-content: center;
+    display: flex;
+}
