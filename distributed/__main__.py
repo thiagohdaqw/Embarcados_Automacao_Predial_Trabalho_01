@@ -1,4 +1,5 @@
 import time
+import signal
 import RPi.GPIO as gpio
 from queue import Queue
 
@@ -19,10 +20,11 @@ def main(to_exit):
     producer_queue = server.init(
         central_config['ip_servidor_central'],
         central_config['porta_servidor_central'],
+        room,
         command_queue
     )
 
-    persons.init(room, roomGPIO, command_queue)
+    persons.init(room, roomGPIO)
     touch.init(room, roomGPIO, producer_queue)
 
     dhtDevice = dht22.init(room, roomGPIO, producer_queue)
@@ -45,7 +47,8 @@ if __name__ == "__main__":
 
     try:
         main(to_exit)
-    except:
+    finally:
+        signal.alarm(0)
         # gpio.cleanup()
 
         for x in to_exit:

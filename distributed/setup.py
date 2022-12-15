@@ -8,10 +8,10 @@ def init(distributed_config) -> tuple[Room, RoomGPIO]:
     gpio.setmode(gpio.BCM)
 
     outputs = {output['name']: output['gpio']    for output in distributed_config['outputs']}
-    inputs  = {input['name'] : input['gpio']     for input  in distributed_config['input']}
+    inputs  = {input['name'] : input['gpio']     for input  in distributed_config['inputs']}
 
     gpio.setup(list(outputs.values()), gpio.OUT)
-    gpio.setup(list(inputs.values()), gpio.IN, pull_up_down=gpio.PUD_UP)
+    gpio.setup(list(inputs.values()), gpio.IN)
 
     name = distributed_config['name']
     dth22 = distributed_config['temperature'][0]['gpio']

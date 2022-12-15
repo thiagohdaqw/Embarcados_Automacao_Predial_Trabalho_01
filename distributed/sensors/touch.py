@@ -15,18 +15,13 @@ def handle_touch_event(sensor_name, room, roomGPIO, producer_queue):
     pin = getattr(roomGPIO, sensor_name)
     current_value = gpio.input(pin)
 
-    setattr(room, sensor_name, bool(gpio.input(pin)))
+    setattr(room, sensor_name, bool(current_value))
 
-    start_edge = gpio.RISING if current_value == gpio.LOW else gpio.FALLING
-    end_edge = gpio.FALLING if current_value == gpio.LOW else gpio.RISING
+    queue = Queue()
+
+    gpio.add_event_detect(pin, gpio.BOTH, callback=queue.put)
 
     while True:
-        notify_on_edge(start_edge, pin, sensor_name, room, producer_queue)
-        notify_on_edge(end_edge, pin, sensor_name, room, producer_queue)
-
-
-def notify_on_edge(edge, pin, sensor_name, room, producer_queue):
-    gpio.wait_for_edge(pin, edge)
-
-    setattr(room, sensor_name, bool(gpio.input(pin)))
-    producer_queue.put_nowait(room)
+        queue.get()
+        setattr(room, sensor_name, bool(gpio.input(pin)))
+        producer_queue.put_nowait(room)

@@ -28,6 +28,6 @@ def connect_central_server(host, port, room):
     conn.connect((host, port))
 
     conn.sendall(int_to_bytes(len(room.name)))
-    conn.sendall(room.name)
+    conn.sendall(room.name.encode('utf-8'))
 
     return conn
