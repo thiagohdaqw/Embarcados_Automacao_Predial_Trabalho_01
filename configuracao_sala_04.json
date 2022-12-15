@@ -1,69 +1,67 @@
 {
-    "nome": "Sala 04",
-    "ip_servidor_distribuido": "localhost",
-    "porta_servidor_distribuido": 8888,
+    "name": "Sala 04",
     "outputs": [
         {
-            "type": "lampada",
+            "name": "lamp01",
             "tag": "Lâmpada 01",
             "gpio": 26
         },
         {
-            "type": "lampada",
+            "name": "lamp02",
             "tag": "Lâmpada 02",
             "gpio": 19
         },
         {
-            "type": "projetor",
+            "name": "projector",
             "tag": "Projetor Multimidia",
             "gpio": 6
         },
         {
-            "type": "ar-condicionado",
+            "name": "air_conditioning",
             "tag": "Ar-Condicionado (1º Andar)",
             "gpio": 13
         },
         {
-            "type": "alarme",
+            "name": "alarm",
             "tag": "Sirene do Alarme",
             "gpio": 5
         }
     ],
     "inputs": [
         {
-          "type": "presenca",
+          "name": "presence",
           "tag": "Sensor de Presença",
           "gpio": 0
         },
         {
-            "type": "fumaca",
+            "name": "smoke",
             "tag": "Sensor de Fumaça",
             "gpio": 11
         },
         {
-            "type": "janela",
+            "name": "window",
             "tag": "Sensor de Janela",
             "gpio": 9
         },
         {
-            "type": "porta",
+            "name": "door",
             "tag": "Sensor de Porta",
             "gpio": 10
         },
         {
-            "type": "contagem",
+            "name": "door_in",
             "tag": "Sensor de Contagem de Pessoas Entrada",
             "gpio": 22
         },
         {
-            "type": "contagem",
+            "name": "door_out",
             "tag": "Sensor de Contagem de Pessoas Saída",
             "gpio": 27
         }
     ],
-    "sensor_temperatura":[
+    "temperature":[
         {
-          "type": "dth22",
+          "name": "dth22",
           "tag": "Sensor de Temperatura e Umidade",
           "gpio": 18
         }
