@@ -1,13 +1,16 @@
 import signal
-from adafruit_dht import DHT22
+import board
 from queue import Queue
 from functools import partial
+from adafruit_dht import DHT22
 
 from distributed.model.room import RoomGPIO, Room
 
 
 def init(room: Room, roomGPIO: RoomGPIO, producer_queue: Queue[Room]):
-    dhtDevice = DHT22(roomGPIO.dth22)
+    pin = getattr(board, f'D{roomGPIO.dth22}')
+
+    dhtDevice = DHT22(pin)
 
     handler = partial(dht22_handler, dhtDevice=dhtDevice,
                       room=room, producer_queue=producer_queue)
