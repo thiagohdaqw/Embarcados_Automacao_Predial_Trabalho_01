@@ -3,10 +3,12 @@ import threading
 import logging
 
 from enum import Enum
-from socket import socket
+from socket import socket, MSG_WAITALL
 from collections import deque
 from typing import List, Callable
+from central.model.building import Building
 from central.server.socket import Address, create_server_socket
+from central.util.bytes import int_from_bytes, int_to_bytes
 
 
 class MessageType(Enum):
@@ -14,9 +16,7 @@ class MessageType(Enum):
     BROADCAST = 1
 
 
-MessageQueue = deque[tuple[MessageType, bytes]]
-
-ReadableHandler = Callable[[bytes, MessageQueue], None]
+ReadableHandler = Callable[[bytes, str, Building], None]
 HttpHandler = Callable[[bytes], bytes]
 
 logger = logging.getLogger('console')
@@ -33,9 +33,11 @@ class Server:
     readable_callbacks: List[ReadableHandler]
     http_callback:      HttpHandler
 
-    message_queues: dict[socket, MessageQueue]
+    building: Building
 
-    def __init__(self, server_central: Address, server_web: Address):
+    def __init__(self, server_central: Address, server_web: Address, building: Building):
+        self.building = building
+
         self.outputs = set()
         self.inputs = set()
         self.readable_callbacks = []
@@ -67,20 +69,21 @@ class Server:
                 self.send_message(w)
 
     def send_message(self, conn: socket):
-        if len(self.message_queues[conn]) == 0:
+        if not self.building.has_messages(conn):
             return
 
-        type, message = self.message_queues[conn].popleft()
+        type, message = self.building.get_room_message(conn)
 
         if type == MessageType.DIRECT:
             self.send_direct_message(conn, message)
         if type == MessageType.BROADCAST:
             self.send_broadcast_message(message)
 
-        if len(self.message_queues[conn]) == 0:
+        if not self.building.has_messages(conn):
             self.outputs.remove(conn)
 
     def send_direct_message(self, conn: socket, message: bytes):
+        conn.sendall(int_to_bytes(len(message)))
         conn.sendall(message)
 
     def send_broadcast_message(self, message: bytes):
@@ -96,6 +99,8 @@ class Server:
         self.http_callback = callback
 
     def disconnect(self, conn: socket):
+        self.building.disconnect_room(conn)
+
         if conn in self.inputs:
             self.inputs.remove(conn)
         if conn in self.outputs:
@@ -117,26 +122,34 @@ class Server:
         self._manage_clients_readable_event(conn)
 
     def _manage_clients_readable_event(self, conn: socket):
-        data = conn.recv(1024)
+        if not (data_len := self._read_or_disconnect(conn, 4)):
+            return
 
-        if not data:
-            self.disconnect(conn)
+        if not (data := self._read_or_disconnect(conn, int_from_bytes(data_len))):
             return
 
         for func in self.readable_callbacks:
-            func(data, self.message_queues[conn])
+            func(data, self.building)
 
-        if len(self.message_queues[conn]) > 0:
+        if self.building.has_messages(conn):
             self.outputs.add(conn)
 
     def _manage_server_central_readable_event(self):
         conn, addr = self.server_central.accept()
 
-        logger.info("Nova conexão de Servidor Distribuido",
+        if not (data_len := self._read_or_disconnect(conn, 4)):
+            return
+
+        if not (data := self._read_or_disconnect(conn, int_from_bytes(data_len))):
+            return
+
+        name = data.decode('utf-8')
+
+        logger.info(f"Nova conexão de Servidor Distribuido ({name})",
                     extra={'conn': Address(*addr)})
 
+        self.building.register_room(name, conn)
         self.inputs.add(conn)
-        self.message_queues[conn] = deque()
 
     def _manage_server_web_readable_event(self):
         conn, addr = self.server_web.accept()
@@ -155,3 +168,12 @@ class Server:
 
             response = self.http_callback(data)
             conn.sendall(response)
+
+    def _read_or_disconnect(self, conn, length):
+        data = conn.recv(length, MSG_WAITALL)
+
+        if not data:
+            self.disconnect(conn)
+            return None
+
+        return data

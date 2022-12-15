@@ -1,10 +1,12 @@
+from central.util import config, logger
+from central.server.server import Server
+from central.server.socket import Address
 import central.controller as controller
-from .util import config, logger
-from .server.server import Server
-from .server.socket import Address
+import central.distributed_server.consumer as consumer
 
 def main():
     logger.init()
+
     central_config = config.get_config()
 
     server = Server(
@@ -22,7 +24,7 @@ def main():
 
     controller.init(web_router)
 
-    server.register_readable_handler(controller.distributed_server.handle_distributed_server_message)
+    server.register_readable_handler(consumer.consume_distributed_server_message)
     server.register_http_handler(web_router.handle_http_message)
 
     server.serve()
