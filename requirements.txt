@@ -1,1 +1,2 @@
-adafruit-circuitpython-dht
+adafruit-circuitpython-dht==3.7.8
+RPi.GPIO==0.7.1
