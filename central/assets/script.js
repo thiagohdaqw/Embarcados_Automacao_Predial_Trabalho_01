@@ -33,6 +33,7 @@ function loadReport() {
 function fillGeneralData(generalData) {
     document.getElementById('general-temperature').textContent = `${generalData.temperature}ºC`;
     document.getElementById('general-humidity').textContent = `${generalData.humidity}%`;
+    document.getElementById('general-persons').textContent = getOnOffText(generalData.persons);
     document.getElementById('general-alarm-system').textContent = getOnOffText(generalData.alarmSystem);
     document.getElementById('general-alarm').textContent = getOnOffText(generalData.alarm);
 
