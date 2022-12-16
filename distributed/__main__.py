@@ -6,9 +6,9 @@ from queue import Queue
 from distributed import setup
 from distributed.util import config
 from distributed.central import server
+import distributed.central.command as command
 from distributed.model.room import Room
 from distributed.sensors import dht22, persons, relay, touch
-
 
 def main(to_exit):
     central_config, distributed_config = config.load_configs()
@@ -33,8 +33,7 @@ def main(to_exit):
 
     while True:
         if not command_queue.empty():
-            # handler command
-            ...
+            command.handle(command_queue, room)
 
         relay.read_relay(room, roomGPIO)
 
