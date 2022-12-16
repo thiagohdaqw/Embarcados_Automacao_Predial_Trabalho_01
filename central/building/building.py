@@ -1,10 +1,13 @@
-
+import logging
 from statistics import mean
 from socket import socket
 
 from central.building.command import CommandType
 from central.model.room import Room
 import central.distributed_server.producer as distributed_server_producer
+
+
+logger = logging.getLogger('actions')
 
 
 class Building:
@@ -88,6 +91,8 @@ class Building:
         self.alarm = False
         self.fire = False
         self.update_relays(False, ['alarm'])
+
+        logger.info(',disable,alarms')
         return True
 
     def enable_alarm_system(self):
@@ -103,6 +108,7 @@ class Building:
         if not sensors:
             self.alarm_system = True
 
+        logger.info(',enable,alarms')
         return sensors
 
     def update_relays(self, value, relays=None):
@@ -140,8 +146,11 @@ class Building:
         if smoke_old == False and smoke == True:
             self.fire = True
             self.activate_alarms()
+            logger.info(',detected,smoke')
+
         if smoke_old == True and smoke == False:
             self.disable_alarms()
+            logger.info(',liberated,smoke')
 
     def check_intrusion_detection(self, room):
         if not self.alarm_system:
@@ -151,6 +160,7 @@ class Building:
         for sensor in sensors:
             if getattr(room, sensor):
                 self.activate_alarms()
+                logger.info(',detected,intrusion')
 
     def activate_alarms(self):
         self.alarm_system = True
