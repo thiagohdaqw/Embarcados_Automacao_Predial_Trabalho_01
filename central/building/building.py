@@ -58,7 +58,7 @@ class Building:
         room = self.rooms[name]
 
         room_smoke_old = room.smoke
-
+        room_presence_old = room.presence
 
         for key, value in kwargs.items():
             setattr(room, key, value)
@@ -66,6 +66,7 @@ class Building:
         self.update_averages()
         self.update_persons()
 
+        self.check_presence(room, room_presence_old)
         self.check_fire_detection(room_smoke_old, room.smoke)
         self.check_intrusion_detection(room)
 
@@ -170,6 +171,16 @@ class Building:
         self.alarm_system = True
         self.alarm = True
         self.update_relays(True, ['alarm'])
+
+    def check_presence(self, room, presence_old):
+        if presence_old == False and room.presence == True and not self.alarm_system:
+            distributed_server_producer.send_direct_message(
+                room.connection,
+                {
+                    'type': CommandType.PRESENCE.value,
+                    'seconds': 15
+                }
+            )
 
     def add_feedback(self, message):
         self.feedbacks.append(message)

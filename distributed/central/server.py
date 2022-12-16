@@ -9,18 +9,16 @@ import distributed.central.producer as producer
 from distributed.util.bytes import int_to_bytes
 
 
-def init(host: str, port: int, room: Room, command_queue: Queue) -> tuple[Queue[Room], Queue]:
+def init(host: str, port: int, room: Room):
     producer_queue = Queue()
 
     conn = connect_central_server(host, port, room)
 
     threading.Thread(target=consumer.consume,
-                     args=(conn, command_queue)).start()
+                     args=(conn, room, producer_queue)).start()
 
     threading.Thread(target=producer.produce,
                      args=(conn, producer_queue)).start()
-
-    return producer_queue
 
 
 def connect_central_server(host, port, room):

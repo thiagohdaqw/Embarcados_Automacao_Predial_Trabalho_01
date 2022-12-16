@@ -21,3 +21,6 @@ def send_message(conn: socket, data: dict):
     body = to_json(data)
     conn.sendall(int_to_bytes(len(body)))
     conn.sendall(body)
+
+    del data
+    del body

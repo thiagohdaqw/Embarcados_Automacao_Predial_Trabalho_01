@@ -7,8 +7,8 @@ from adafruit_dht import DHT22
 from distributed.model.room import RoomGPIO, Room
 
 
-def init(room: Room, roomGPIO: RoomGPIO, producer_queue: Queue[Room]):
-    pin = getattr(board, f'D{roomGPIO.dth22}')
+def init(room: Room, producer_queue: Queue[Room]):
+    pin = getattr(board, f'D{room.gpio.dth22}')
 
     dhtDevice = DHT22(pin)
 

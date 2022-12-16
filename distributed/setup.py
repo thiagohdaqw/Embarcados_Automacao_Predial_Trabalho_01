@@ -16,7 +16,7 @@ def init(distributed_config) -> tuple[Room, RoomGPIO]:
     name = distributed_config['name']
     dth22 = distributed_config['temperature'][0]['gpio']
 
-    room = Room(name)
     roomGPIO = RoomGPIO(name, dth22, **outputs, **inputs)
+    room = Room(name, roomGPIO)
 
-    return room, roomGPIO
+    return room

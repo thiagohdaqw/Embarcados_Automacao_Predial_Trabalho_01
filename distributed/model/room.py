@@ -1,6 +1,5 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import Optional
-
 
 @dataclass
 class RoomGPIO:
@@ -21,10 +20,10 @@ class RoomGPIO:
 	door_out:			int
 	presence:			int
 
-
 @dataclass
 class Room:
 	name:				str
+	gpio:				RoomGPIO
 
 	temperature: 		Optional[float] = field(default=None)
 	humidity:			Optional[int]   = field(default=None)
@@ -41,3 +40,16 @@ class Room:
 	smoke:				bool	= field(default=False)
 	window:				bool	= field(default=False)
 	presence:			bool	= field(default=False)
+
+	lamp_on_time:		int		= field(default=0)
+	main_delay:			float	= field(default=0.5)
+
+
+	def asdict(self):
+		data = asdict(self)
+
+		del data['lamp_on_time']
+		del data['main_delay']
+		del data['gpio']
+
+		return data
