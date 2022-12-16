@@ -183,6 +183,8 @@ class Building:
             )
 
     def add_feedback(self, message):
+        logger.info(f',feedback,{message}')
+
         self.feedbacks.append(message)
 
     def get_feedbacks(self):

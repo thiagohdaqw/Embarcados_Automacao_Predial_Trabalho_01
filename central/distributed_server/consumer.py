@@ -2,6 +2,7 @@ from central.building.building import Building
 from central.util.json import from_json
 
 
+
 def consume_distributed_server_message(data: bytes, building: Building):
     data_json = from_json(data)
 
