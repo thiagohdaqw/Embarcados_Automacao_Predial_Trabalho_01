@@ -59,3 +59,9 @@ def toogle_alarm_system(body, building: Building):
         'success': success,
         'message': message
     })
+
+
+def get_feedbacks(body, building: Building):
+    return build_json_response({
+        'feedbacks': building.get_feedbacks()
+    })

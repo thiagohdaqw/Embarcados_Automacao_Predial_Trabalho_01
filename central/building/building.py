@@ -1,6 +1,7 @@
 import logging
 from statistics import mean
 from socket import socket
+from collections import deque
 
 from central.building.command import CommandType
 from central.model.room import Room
@@ -14,6 +15,8 @@ class Building:
 
     rooms: dict[str, Room]
     connectionsRooms: dict[socket, Room]
+
+    feedbacks: deque
 
     temperature:    float
     humidity:       int
@@ -31,6 +34,7 @@ class Building:
         self.alarm = False
         self.persons = 0
         self.fire = False
+        self.feedbacks = deque()
 
     @property
     def online_rooms(self):
@@ -166,6 +170,14 @@ class Building:
         self.alarm_system = True
         self.alarm = True
         self.update_relays(True, ['alarm'])
+
+    def add_feedback(self, message):
+        self.feedbacks.append(message)
+
+    def get_feedbacks(self):
+        feedbacks = list(self.feedbacks)
+        self.feedbacks.clear()
+        return feedbacks
 
     def asdict(self):
         return {
