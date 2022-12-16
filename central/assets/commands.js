@@ -29,7 +29,11 @@ function turnOffRelays() {
     .then(data => window.alert(data.message))
 }
 
-function onToogleRelayClick(rooom_name, relay_name) {
+function onToogleRelayClick(online, rooom_name, relay_name) {
+    if (!online) {
+        return;
+    }
+
     fetch('/api/rooms/relays/toggle', {
         method: 'POST',
         body: JSON.stringify({

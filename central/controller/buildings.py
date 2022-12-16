@@ -42,8 +42,10 @@ def toogle_alarm_system(body, building: Building):
     success = True
 
     if building.alarm_system:
-        building.disable_alarm_system()
-        message = 'O comando para a desativação do sistema de alarme foi enviado com sucesso'
+        if building.disable_alarms():
+            message = 'O comando para a desativação do sistema de alarme foi enviado com sucesso'
+        else:
+            message = 'Nao foi possivel realizar o comando, o predio esta em chamas!'
     else:
         sensors = building.enable_alarm_system()
 

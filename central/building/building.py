@@ -17,6 +17,7 @@ class Building:
     alarm_system:   bool
     alarm:          bool
     persons:        int
+    fire:           bool
 
     def __init__(self):
         self.rooms = {}
@@ -26,6 +27,11 @@ class Building:
         self.alarm_system = False
         self.alarm = False
         self.persons = 0
+        self.fire = False
+
+    @property
+    def online_rooms(self):
+        return filter(lambda room: room.online, self.rooms.values())
 
     def register_room(self, name: str, conn: socket):
         room = self.rooms.get(name, Room(name, conn))
@@ -44,17 +50,22 @@ class Building:
     def update_room(self, name, **kwargs):
         room = self.rooms[name]
 
+        room_smoke_old = room.smoke
+
+
         for key, value in kwargs.items():
             setattr(room, key, value)
 
         self.update_averages()
         self.update_persons()
 
-        self.alarm |= kwargs.get('alarm', self.alarm)
+        self.check_fire_detection(room_smoke_old, room.smoke)
 
     def update_averages(self):
-        temperatures = list(map(lambda r: r.temperature, filter(lambda r: r.temperature is not None, self.rooms.values())))
-        humidities = list(map(lambda r: r.humidity, filter(lambda r: r.humidity is not None, self.rooms.values())))
+        temperatures = list(map(lambda r: r.temperature, filter(
+            lambda r: r.temperature is not None, self.online_rooms)))
+        humidities = list(map(lambda r: r.humidity, filter(
+            lambda r: r.humidity is not None, self.online_rooms)))
 
         if humidities:
             self.humidity = mean(humidities)
@@ -62,46 +73,45 @@ class Building:
             self.temperature = mean(temperatures)
 
     def update_persons(self):
-        self.persons = sum(room.persons for room in self.rooms.values())
+        self.persons = sum(room.persons for room in self.online_rooms)
 
-    def disable_alarm_system(self):
+    def disable_alarms(self):
+        rooms_with_fire = list(
+            filter(lambda room: room.smoke, self.online_rooms))
+
+        if rooms_with_fire:
+            self.fire = True
+            return False
+
         self.alarm_system = False
         self.alarm = False
-
-        rooms_with_alarm_on = filter(lambda room: room.online and room.alarm, self.rooms.values())
-        rooms_connections = map(lambda room: room.connection, rooms_with_alarm_on)
-
-        distributed_server_producer.send_broadcast_message(
-            rooms_connections,
-            {
-                'type': CommandType.RELAY.value,
-                'relay_name': 'alarm',
-                'value': False
-            }
-        )
+        self.fire = False
+        self.update_relays(False, ['alarm'])
+        return True
 
     def enable_alarm_system(self):
         sensors_must_be_off = ['presence', 'door', 'window', 'smoke', 'alarm']
         sensors = dict()
 
-        for room in self.rooms.values():
+        for room in self.online_rooms:
             for sensor in sensors_must_be_off:
                 if getattr(room, sensor):
                     sensors[room.name] = sensors.get(room.name, [])
                     sensors[room.name].append(sensor)
-        
+
         if not sensors:
             self.alarm_system = True
 
-        return sensors        
+        return sensors
 
     def update_relays(self, value, relays=None):
         if not relays:
-            relays = ['lamp01', 'lamp02', 'projector', 'air_conditioning', 'alarm']
+            relays = ['lamp01', 'lamp02', 'projector',
+                      'air_conditioning', 'alarm']
 
         for relay in relays:
             distributed_server_producer.send_broadcast_message(
-                self.rooms.values(),
+                self.online_rooms,
                 {
                     'type': CommandType.RELAY.value,
                     'relay_name': relay,
@@ -124,6 +134,18 @@ class Building:
                 'value': not getattr(room, command['sensor_name'])
             }
         )
+
+    def check_fire_detection(self, smoke_old, smoke):
+        if smoke_old == False and smoke == True:
+            self.fire = True
+            self.activate_alarms()
+        if smoke_old == True and smoke == False:
+            self.disable_alarms()
+
+    def activate_alarms(self):
+        self.alarm_system = True
+        self.alarm = True
+        self.update_relays(True, ['alarm'])
 
     def asdict(self):
         return {
