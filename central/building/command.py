@@ -1,5 +1,7 @@
 from enum import Enum
+from dataclasses import dataclass, field
 
 
 class CommandType(Enum):
-    ALARM = 0
+    RELAY = 1
+

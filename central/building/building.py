@@ -71,10 +71,14 @@ class Building:
         rooms_with_alarm_on = filter(lambda room: room.online and room.alarm, self.rooms.values())
         rooms_connections = map(lambda room: room.connection, rooms_with_alarm_on)
 
-        distributed_server_producer.send_broadcast_message(rooms_connections, {
-            'type': CommandType.ALARM.value,
-            'value': False
-        })
+        distributed_server_producer.send_broadcast_message(
+            rooms_connections,
+            {
+                'type': CommandType.RELAY.value,
+                'sensor_name': 'alarm',
+                'value': False
+            }
+        )
 
     def enable_alarm_system(self):
         sensors_must_be_off = ['presence', 'door', 'window', 'smoke', 'alarm']
@@ -90,6 +94,18 @@ class Building:
             self.alarm_system = True
 
         return sensors        
+
+    def toggle_room_relay(self, command):
+        room = self.rooms[command['room_name']]
+
+        distributed_server_producer.send_direct_message(
+            room.connection,
+            {
+                'type': CommandType.RELAY.value,
+                'sensor_name': command['sensor_name'],
+                'value': not getattr(room, command['sensor_name'])
+            }
+        )
 
     def asdict(self):
         return {

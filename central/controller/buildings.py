@@ -11,7 +11,7 @@ def get_building(body: str, building: Building):
 
 
 def toogle_alarm_system(body, building: Building):
-    logging.info('Tentativa de alternar o sistema de alarme')
+    logging.info(',toggle,alarm system')
 
     message = ''
     success = True
@@ -28,5 +28,7 @@ def toogle_alarm_system(body, building: Building):
         else:
             message = 'O comando para a ativação do sistema de alarme foi enviado com sucesso'
     
-    return build_json_response({success:success, message: message})
-
+    return build_json_response({
+        'success': success,
+        'message': message
+    })
