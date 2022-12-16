@@ -60,6 +60,7 @@ class Building:
         self.update_persons()
 
         self.check_fire_detection(room_smoke_old, room.smoke)
+        self.check_intrusion_detection(room)
 
     def update_averages(self):
         temperatures = list(map(lambda r: r.temperature, filter(
@@ -142,6 +143,15 @@ class Building:
         if smoke_old == True and smoke == False:
             self.disable_alarms()
 
+    def check_intrusion_detection(self, room):
+        if not self.alarm_system:
+            return
+        
+        sensors = ['door', 'presence', 'window']
+        for sensor in sensors:
+            if getattr(room, sensor):
+                self.activate_alarms()
+
     def activate_alarms(self):
         self.alarm_system = True
         self.alarm = True
@@ -154,5 +164,6 @@ class Building:
             'alarm_system': self.alarm_system,
             'alarm': self.alarm,
             'persons': self.persons,
+            'fire': self.fire,
             'rooms': [room.asdict() for room in self.rooms.values()]
         }
