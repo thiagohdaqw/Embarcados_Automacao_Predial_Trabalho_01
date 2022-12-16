@@ -1,5 +1,6 @@
-import threading
+import time
 import socket
+import threading
 from queue import Queue
 
 from distributed.model.room import Room
@@ -25,9 +26,13 @@ def init(host: str, port: int, room: Room, command_queue: Queue) -> tuple[Queue[
 def connect_central_server(host, port, room):
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    conn.connect((host, port))
+    while True:
+        try:
+            conn.connect((host, port))
 
-    conn.sendall(int_to_bytes(len(room.name)))
-    conn.sendall(room.name.encode('utf-8'))
-
-    return conn
+            conn.sendall(int_to_bytes(len(room.name)))
+            conn.sendall(room.name.encode('utf-8'))
+            return conn
+        except TimeoutError:
+            print("Cant stablish a Server Central connection. Retrying in 5 secs...")
+            time.sleep(5)
