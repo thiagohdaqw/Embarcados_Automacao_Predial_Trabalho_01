@@ -95,6 +95,20 @@ class Building:
 
         return sensors        
 
+    def update_relays(self, relays, value):
+        for relay in relays:
+            distributed_server_producer.send_broadcast_message(
+                self.rooms.values(),
+                {
+                    'type': CommandType.RELAY.value,
+                    'relay_name': relay,
+                    'value': value
+                }
+            )
+
+    def update_lamps(self, value):
+        lamps = ['lamp01', 'lamp02']
+        self.update_relays(lamps, value)
     def toggle_room_relay(self, command):
         room = self.rooms[command['room_name']]
 

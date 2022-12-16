@@ -1,13 +1,21 @@
 import logging
-from central.building.building import Building
 from .http import build_json_response
-
+from central.building.building import Building
+from central.util.json import from_json
 
 logger = logging.getLogger('actions')
 
 
 def get_building(body: str, building: Building):
     return build_json_response(building.asdict())
+
+def update_lamps(body, building: Building):
+    logging.info(f',update {body["value"]},lamps')
+
+    data = from_json(body)
+
+    return build_json_response
+
 
 
 def toogle_alarm_system(body, building: Building):

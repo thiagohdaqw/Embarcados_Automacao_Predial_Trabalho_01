@@ -7,6 +7,17 @@ function onAlarmSystemClick() {
     .then(data => window.alert(data.message))
 }
 
+function turnOnLamps() {
+    fetch('/api/buildings/lamps', {
+        method: 'POST',
+        body: JSON.stringify({
+            value: true
+        })
+    })
+    .then(r => r.json())
+    .then(data => window.alert(data.message))
+}
+
 function onToogleRelayClick(rooom_name, sensor_name) {
     fetch('/api/rooms/relay/toggle', {
         method: 'POST',
