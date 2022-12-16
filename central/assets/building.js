@@ -17,15 +17,15 @@ function runReportPolling() {
     }
 
     reportPollingInterval = setInterval(() => {
-        loadReport()
+        loadBuildingReport()
     }, Number(refreshRateElement.value) * 1000);
 }
 
-function loadReport() {
-    fetch('/api/reports')
+function loadBuildingReport() {
+    fetch('/api/buildings')
         .then(r => r.json())
         .then(data => {
-            fillGeneralData(data.general);
+            fillGeneralData(data);
             fillRoomsData(data.rooms)
         })
 }
@@ -33,8 +33,8 @@ function loadReport() {
 function fillGeneralData(generalData) {
     document.getElementById('general-temperature').textContent = `${generalData.temperature}ºC`;
     document.getElementById('general-humidity').textContent = `${generalData.humidity}%`;
-    document.getElementById('general-persons').textContent = getOnOffText(generalData.persons);
-    document.getElementById('general-alarm-system').textContent = getOnOffText(generalData.alarmSystem);
+    document.getElementById('general-persons').textContent = generalData.persons;
+    document.getElementById('general-alarm-system').textContent = getOnOffText(generalData.alarm_system);
     document.getElementById('general-alarm').textContent = getOnOffText(generalData.alarm);
 
     const alarmContainer = document.getElementById('alarm-container');
@@ -94,12 +94,17 @@ function getRoomHtml(room) {
                 <div class="card-elem">
                     <div class="card-elem-title">Ar-condicionado</div>
                     <img class="icon" src="icons/ice.png">
-                    <p>${getOnOffText(room.airConditioning)}</p>
+                    <p>${getOnOffText(room.air_conditioning)}</p>
                 </div>
                 <div class="card-elem">
                     <div class="card-elem-title">Presença</div>
                     <img class="icon" src="icons/presence.png">
                     <p>${getOnOffText(room.presence)}</p>
+                </div>
+                <div class="card-elem">
+                    <div class="card-elem-title">Porta</div>
+                    <img class="icon" src="icons/door.png">
+                    <p>${getOnOffText(room.door)}</p>
                 </div>
                 <div class="card-elem">
                     <div class="card-elem-title">Janela</div>
@@ -115,6 +120,11 @@ function getRoomHtml(room) {
                     <div class="card-elem-title">Lâmpada 02</div>
                     <img class="icon" src="icons/lamp.png">
                     <p>${getOnOffText(room.lamp02)}</p>
+                </div>
+                <div class="card-elem">
+                    <div class="card-elem-title ${room.alarm ? 'alarm-animation' : ''}">Alarme</div>
+                    <img class="icon" src="icons/buzzer.png">
+                    <p>${room.alarm}</p>
                 </div>
             </div>
         </div>\n

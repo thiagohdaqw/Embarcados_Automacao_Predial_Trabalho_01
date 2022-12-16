@@ -2,18 +2,12 @@ import select
 import threading
 import logging
 
-from enum import Enum
 from socket import socket, MSG_WAITALL
-from collections import deque
 from typing import List, Callable
-from central.model.building import Building
+from central.building.building import Building
 from central.server.socket import Address, create_server_socket
 from central.util.bytes import int_from_bytes, int_to_bytes
-
-
-class MessageType(Enum):
-    DIRECT = 0
-    BROADCAST = 1
+from central.building.command import MessageType
 
 
 ReadableHandler = Callable[[bytes, str, Building], None]
@@ -68,29 +62,9 @@ class Server:
             for w in writeables:
                 self.send_message(w)
 
-    def send_message(self, conn: socket):
-        if not self.building.has_messages(conn):
-            return
-
-        type, message = self.building.get_room_message(conn)
-
-        if type == MessageType.DIRECT:
-            self.send_direct_message(conn, message)
-        if type == MessageType.BROADCAST:
-            self.send_broadcast_message(message)
-
-        if not self.building.has_messages(conn):
-            self.outputs.remove(conn)
-
-    def send_direct_message(self, conn: socket, message: bytes):
-        conn.sendall(int_to_bytes(len(message)))
-        conn.sendall(message)
-
-    def send_broadcast_message(self, message: bytes):
-        clients = filter(lambda c: c != self.server_central and c !=
-                         self.server_web, self.inputs)
-        for conn in clients:
-            self.send_direct_message(conn, message)
+    def receive_acknowledgment(self, conn: socket):
+        ack = conn.recv(1)
+        return int(ack) > 0
 
     def register_readable_handler(self, callback: ReadableHandler):
         self.readable_callbacks.append(callback)

@@ -107,6 +107,10 @@ h3 {
     display: flex;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .alarm-animation {
     animation-name: alarm-cycle;
     animation-duration: 1s;

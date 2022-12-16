@@ -1,10 +1,14 @@
-from dataclasses import dataclass, field
-from collections import deque
+from dataclasses import dataclass, field, asdict
+from socket import socket
 from typing import Optional
 
 @dataclass
 class Room:
 	name:				str
+
+	connection:			socket
+
+	online:				bool			= field(default=True)
 
 	temperature: 		Optional[float] = field(default=None)
 	humidity:			Optional[int]   = field(default=None)
@@ -22,4 +26,10 @@ class Room:
 	window:				bool	= field(default=False)
 	presence:			bool	= field(default=False)
 
-	message_queue:  deque	= field(default_factory=deque)
+
+	def asdict(self):
+		dict = asdict(self)
+
+		del dict['socket']
+
+		return dict

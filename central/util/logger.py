@@ -22,6 +22,6 @@ def init_actions_logger():
 
     file_handler = logging.FileHandler('central_logs.csv')
     file_handler.setLevel(logging.INFO)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s,%(conn)s,%(message)s'))
+    file_handler.setFormatter(logging.Formatter('%(asctime)s,%(message)s'))
 
     logger.addHandler(file_handler)

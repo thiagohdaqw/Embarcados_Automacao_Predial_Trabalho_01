@@ -1,3 +1,4 @@
+from central.building.building import Building
 from central.util import config, logger
 from central.server.server import Server
 from central.server.socket import Address
@@ -9,6 +10,8 @@ def main():
 
     central_config = config.get_config()
 
+    building = Building()
+
     server = Server(
         server_central=Address(
             central_config['ip_servidor_central'],
@@ -17,10 +20,11 @@ def main():
         server_web=Address(
             central_config['ip_servidor_web'],
             central_config['porta_servidor_web'],
-        )
+        ),
+        building=building,
     )
 
-    web_router = controller.router.HttpRouter(server)
+    web_router = controller.router.HttpRouter(server, building)
 
     controller.init(web_router)
 

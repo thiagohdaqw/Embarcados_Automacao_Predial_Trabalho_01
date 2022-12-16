@@ -8,3 +8,6 @@ def read_json_file(file, dir=os.getcwd()):
 
 def from_json(data):
     return json.loads(data)
+
+def to_json(dict):
+    return json.dumps(dict).encode('utf-8')
