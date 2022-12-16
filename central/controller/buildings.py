@@ -9,13 +9,30 @@ logger = logging.getLogger('actions')
 def get_building(body: str, building: Building):
     return build_json_response(building.asdict())
 
+
 def update_lamps(body, building: Building):
     logging.info(f',update {body["value"]},lamps')
 
     data = from_json(body)
 
-    return build_json_response
+    building.update_lamps(data['value'])
 
+    return build_json_response({
+        'success': True,
+        'message': 'O comando para atualizar as lampadas do prédio foi enviado'
+    })
+
+def update_relays(body, building: Building):
+    logging.info(f',update {body["value"]},relays')
+
+    data = from_json(body)
+
+    building.update_relays(data['value'])
+
+    return build_json_response({
+        'success': True,
+        'message': 'O comando para atualizar das cargas do prédio foi enviado'
+    })
 
 
 def toogle_alarm_system(body, building: Building):
@@ -35,7 +52,7 @@ def toogle_alarm_system(body, building: Building):
             success = False
         else:
             message = 'O comando para a ativação do sistema de alarme foi enviado com sucesso'
-    
+
     return build_json_response({
         'success': success,
         'message': message

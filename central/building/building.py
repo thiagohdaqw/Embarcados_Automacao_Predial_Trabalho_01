@@ -75,7 +75,7 @@ class Building:
             rooms_connections,
             {
                 'type': CommandType.RELAY.value,
-                'sensor_name': 'alarm',
+                'relay_name': 'alarm',
                 'value': False
             }
         )
@@ -95,7 +95,10 @@ class Building:
 
         return sensors        
 
-    def update_relays(self, relays, value):
+    def update_relays(self, value, relays=None):
+        if not relays:
+            relays = ['lamp01', 'lamp02', 'projector', 'air_conditioning', 'alarm']
+
         for relay in relays:
             distributed_server_producer.send_broadcast_message(
                 self.rooms.values(),
@@ -108,7 +111,8 @@ class Building:
 
     def update_lamps(self, value):
         lamps = ['lamp01', 'lamp02']
-        self.update_relays(lamps, value)
+        self.update_relays(value, lamps)
+
     def toggle_room_relay(self, command):
         room = self.rooms[command['room_name']]
 
