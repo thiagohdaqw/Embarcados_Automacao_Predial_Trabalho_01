@@ -114,6 +114,8 @@ class Server:
         self.building.register_room(name, conn)
         self.inputs.add(conn)
 
+        conn.sendall(data)
+
     def _manage_server_web_readable_event(self):
         conn, addr = self.server_web.accept()
 

@@ -1,5 +1,5 @@
 {
-    "nome": "Sala 03",
+    "name": "Sala 03",
     "outputs": [
         {
             "name": "lamp01",
@@ -49,12 +49,12 @@
             "gpio": 16
         },
         {
-            "name": "contagem",
+            "name": "door_in",
             "tag": "Sensor de Contagem de Pessoas Entrada",
             "gpio": 20
         },
         {
-            "name": "contagem",
+            "name": "door_out",
             "tag": "Sensor de Contagem de Pessoas Saída",
             "gpio": 21
         }

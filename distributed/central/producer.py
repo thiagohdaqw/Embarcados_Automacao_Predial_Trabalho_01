@@ -1,7 +1,8 @@
-from socket import socket
-from queue import Queue
+import os
 import dataclasses
+from queue import Queue
 from typing import Union
+from socket import socket
 
 from distributed.model.room import Room
 from distributed.util.json import to_json
@@ -19,9 +20,13 @@ def produce(conn: socket, queue: Queue[Union[Room,dict]]):
 
 
 def send_message(conn: socket, data: dict):
-    body = to_json(data)
-    conn.sendall(int_to_bytes(len(body)))
-    conn.sendall(body)
-
-    del data
-    del body
+    try:
+        body = to_json(data)
+        conn.sendall(int_to_bytes(len(body)))
+        conn.sendall(body)
+    except (BrokenPipeError, ConnectionResetError):
+        print('Connection with Central Server were lost')
+        os._exit(1)
+    finally:
+        del data
+        del body

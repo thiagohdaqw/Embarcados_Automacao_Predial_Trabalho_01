@@ -26,10 +26,12 @@ def connect_central_server(host, port, room):
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     while True:
-        if conn.connect_ex((host, port)) != 0:
+        try:
+            conn.connect((host, port))
+            conn.sendall(int_to_bytes(len(room.name)))
+            conn.sendall(room.name.encode('utf-8'))
+            conn.recv(len(room.name), socket.MSG_WAITALL)
+            return conn
+        except (ConnectionRefusedError, BrokenPipeError, ConnectionResetError):
             print("Cant stablish a Server Central connection. Retrying in 5 secs...")
             time.sleep(5)
-
-        conn.sendall(int_to_bytes(len(room.name)))
-        conn.sendall(room.name.encode('utf-8'))
-        return conn
