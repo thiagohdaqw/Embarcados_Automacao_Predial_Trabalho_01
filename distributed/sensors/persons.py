@@ -10,7 +10,7 @@ def init(room: Room):
     gpio.add_event_detect(room.gpio.door_in, gpio.RISING)
     gpio.add_event_detect(room.gpio.door_out, gpio.RISING)
 
-    threading.Thread(target=run_persons_counter, args=(room)).start()
+    threading.Thread(target=run_persons_counter, args=(room,)).start()
 
 
 def run_persons_counter(room: Room):

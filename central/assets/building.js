@@ -104,30 +104,30 @@ function getRoomHtml(room) {
                     <img class="icon" src="icons/window.png">
                     <p>${room.window ? 'Aberta' : 'Fechada'}</p>
                 </div>
-                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, ${room.name}, 'projector')">
+                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, '${room.name}', 'projector')">
                     <div class="card-elem-title">Projetor</div>
                     <img class="icon" src="icons/projector.png">
                     <p>${getOnOffText(room.projector)}</p>
                 </div>
-                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, ${room.name}, 'air_conditioning')">
+                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, '${room.name}', 'air_conditioning')">
                     <div class="card-elem-title">Ar-condicionado</div>
                     <img class="icon" src="icons/ice.png">
                     <p>${getOnOffText(room.air_conditioning)}</p>
                 </div>
-                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, ${room.name}, 'lamp01'>
+                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, '${room.name}', 'lamp01')">
                     <div class="card-elem-title">Lâmpada 01</div>
                     <img class="icon" src="icons/lamp.png">
                     <p>${getOnOffText(room.lamp01)}</p>
                 </div>
-                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, ${room.name}, 'lamp02'>
+                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, '${room.name}', 'lamp02')">
                     <div class="card-elem-title">Lâmpada 02</div>
                     <img class="icon" src="icons/lamp.png">
                     <p>${getOnOffText(room.lamp02)}</p>
                 </div>
-                <div class="card-elem clickable" onclick="toggleRelay(${room.online}, ${room.name}, 'alarm'>
-                    <div class="card-elem-title ${room.alarm ? 'alarm-animation' : ''}">Alarme</div>
+                <div class="card-elem clickable ${room.alarm ? 'alarm-animation' : ''}" onclick="toggleRelay(${room.online}, '${room.name}', 'alarm')">
+                    <div class="card-elem-title">Alarme</div>
                     <img class="icon" src="icons/buzzer.png">
-                    <p>${room.alarm}</p>
+                    <p>${getOnOffText(room.alarm)}</p>
                 </div>
             </div>
         </div>\n

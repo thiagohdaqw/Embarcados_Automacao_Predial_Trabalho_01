@@ -29,7 +29,7 @@ function turnOffRelays() {
     .then(data => addFeedbacks([data.message]))
 }
 
-function toggleRelay(online, rooom_name, relay_name) {
+function toggleRelay(online, room_name, relay_name) {
     if (!online) {
         return;
     }
@@ -37,7 +37,7 @@ function toggleRelay(online, rooom_name, relay_name) {
     fetch('/api/rooms/relays', {
         method: 'POST',
         body: JSON.stringify({
-            rooom_name,
+            room_name,
             relay_name
         })
     })

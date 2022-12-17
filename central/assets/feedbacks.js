@@ -8,7 +8,7 @@ function clearFeedbacks() {
 
 function renderFeedbacks(new_count) {
     container = document.getElementById('notifications');
-    container.innerHTML = feedbacks.reverse().reduce((html, feedback, index) => html + `
+    container.innerHTML = [...feedbacks].reverse().reduce((html, feedback, index) => html + `
         <div class="notification ${index < new_count ? 'notification-animation' : ''}">
             ${feedback}
         </div>

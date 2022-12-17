@@ -48,7 +48,7 @@ def toogle_alarm_system(body, building: Building):
         sensors = building.enable_alarm_system()
 
         if sensors:
-            message = 'Não foi possível acionar o sistema de alarme, os seguintes sensores estão ativados: {sensors}'
+            message = f'Não foi possível acionar o sistema de alarme, os seguintes sensores estão ativados: {sensors}'
             success = False
         else:
             message = 'O comando para a ativação do sistema de alarme foi enviado com sucesso'

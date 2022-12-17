@@ -111,9 +111,9 @@ class Building:
                     sensors[room.name].append(sensor)
 
         if not sensors:
+            logger.info(',enable,alarms')
             self.alarm_system = True
 
-        logger.info(',enable,alarms')
         return sensors
 
     def update_relays(self, value, relays=None):
@@ -121,9 +121,12 @@ class Building:
             relays = ['lamp01', 'lamp02', 'projector',
                       'air_conditioning', 'alarm']
 
+        if self.fire and not value:
+            relays.remove('alarm')
+
         for relay in relays:
             distributed_server_producer.send_broadcast_message(
-                self.online_rooms,
+                map(lambda room: room.connection, self.online_rooms),
                 {
                     'type': CommandType.RELAY.value,
                     'relay_name': relay,
@@ -138,12 +141,15 @@ class Building:
     def toggle_room_relay(self, command):
         room = self.rooms[command['room_name']]
 
+        if self.fire and command['relay_name'] == 'alarm':
+            return None
+
         distributed_server_producer.send_direct_message(
             room.connection,
             {
                 'type': CommandType.RELAY.value,
-                'sensor_name': command['sensor_name'],
-                'value': not getattr(room, command['sensor_name'])
+                'relay_name': command['relay_name'],
+                'value': not getattr(room, command['relay_name'])
             }
         )
 
@@ -170,7 +176,11 @@ class Building:
     def activate_alarms(self):
         self.alarm_system = True
         self.alarm = True
-        self.update_relays(True, ['alarm'])
+
+        rooms_without_alarm_off = filter(lambda room: not room.alarm, self.online_rooms)
+
+        for room in rooms_without_alarm_off:
+            self.update_relays(True, ['alarm'])
 
     def check_presence(self, room, presence_old):
         if presence_old == False and room.presence == True and not self.alarm_system:

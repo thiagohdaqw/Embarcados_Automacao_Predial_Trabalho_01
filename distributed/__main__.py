@@ -9,7 +9,7 @@ from distributed.central import server
 from distributed.sensors import dht22, persons, relay, touch
 
 def main(to_exit):
-    central_config, distributed_config = config.load_configs()
+    distributed_config, central_config  = config.load_configs()
 
     room = setup.init(distributed_config)
 
@@ -31,6 +31,9 @@ def main(to_exit):
             relay.update_lamps(room.gpio, True)
             room.lamp_on_time -= room.main_delay
 
+            if room.lamp_on_time <= 0:
+                relay.update_lamps(room.gpio, False)
+
         relay.read_relay(room)
 
         producer_queue.put_nowait(room)
@@ -43,7 +46,6 @@ if __name__ == "__main__":
     try:
         main(to_exit)
     finally:
-        signal.alarm(0)
         # gpio.cleanup()
 
         for x in to_exit:

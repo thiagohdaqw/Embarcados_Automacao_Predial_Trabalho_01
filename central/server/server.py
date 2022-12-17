@@ -21,7 +21,6 @@ class Server:
     server_web:     socket
 
     inputs:     set[socket]
-    outputs:    set[socket]
 
     readable_callbacks: List[ReadableHandler]
     http_callback:      HttpHandler
@@ -31,7 +30,6 @@ class Server:
     def __init__(self, server_central: Address, server_web: Address, building: Building):
         self.building = building
 
-        self.outputs = set()
         self.inputs = set()
         self.readable_callbacks = []
         self.message_queues = {}
@@ -53,13 +51,10 @@ class Server:
     def serve(self):
         while True:
             readables, writeables, _ = select.select(
-                self.inputs, self.outputs, [])
+                self.inputs, [], [])
 
             for r in readables:
                 self._manage_readable_event(r)
-
-            for w in writeables:
-                self.send_message(w)
 
     def receive_acknowledgment(self, conn: socket):
         ack = conn.recv(1)
@@ -76,8 +71,6 @@ class Server:
 
         if conn in self.inputs:
             self.inputs.remove(conn)
-        if conn in self.outputs:
-            self.outputs.remove(conn)
         if conn in self.message_queues:
             del self.message_queues[conn]
 
@@ -103,9 +96,6 @@ class Server:
 
         for func in self.readable_callbacks:
             func(data, self.building)
-
-        if self.building.has_messages(conn):
-            self.outputs.add(conn)
 
     def _manage_server_central_readable_event(self):
         conn, addr = self.server_central.accept()

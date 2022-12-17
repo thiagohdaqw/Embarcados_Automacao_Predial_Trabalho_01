@@ -28,8 +28,7 @@ class Room:
 
 
 	def asdict(self):
-		dict = asdict(self)
+		exclude_fields = ['asdict', 'connection']
+		fields = filter(lambda field: not field.startswith('_') and field not in exclude_fields, dir(self))
 
-		del dict['socket']
-
-		return dict
+		return {field: getattr(self, field) for field in fields}

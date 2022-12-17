@@ -20,17 +20,16 @@ def init(host: str, port: int, room: Room):
     threading.Thread(target=producer.produce,
                      args=(conn, producer_queue)).start()
 
+    return producer_queue
 
 def connect_central_server(host, port, room):
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     while True:
-        try:
-            conn.connect((host, port))
-
-            conn.sendall(int_to_bytes(len(room.name)))
-            conn.sendall(room.name.encode('utf-8'))
-            return conn
-        except TimeoutError:
+        if conn.connect_ex((host, port)) != 0:
             print("Cant stablish a Server Central connection. Retrying in 5 secs...")
             time.sleep(5)
+
+        conn.sendall(int_to_bytes(len(room.name)))
+        conn.sendall(room.name.encode('utf-8'))
+        return conn

@@ -14,7 +14,7 @@ def execute_command(command:dict, room: Room) -> Optional[dict]:
     command_type = command['type']
 
     if command_type in COMMAND_EXECUTOR:
-        COMMAND_EXECUTOR[command_type](command, room)
+        return COMMAND_EXECUTOR[command_type](command, room)
 
 
 def handle_relay_command(command, room):

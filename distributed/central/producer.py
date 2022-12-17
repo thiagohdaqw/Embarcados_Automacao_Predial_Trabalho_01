@@ -1,13 +1,14 @@
 from socket import socket
 from queue import Queue
 import dataclasses
+from typing import Union
 
 from distributed.model.room import Room
 from distributed.util.json import to_json
 from distributed.util.bytes import int_to_bytes
 
 
-def produce(conn: socket, queue: Queue[Room | dict]):
+def produce(conn: socket, queue: Queue[Union[Room,dict]]):
     while True:
         data = queue.get()
         
