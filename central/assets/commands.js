@@ -4,7 +4,7 @@ function onAlarmSystemClick() {
         method: 'POST',
     })
     .then(r => r.json())
-    .then(data => window.alert(data.message))
+    .then(data => addFeedbacks([data.message]))
 }
 
 function turnOnLamps() {
@@ -15,7 +15,7 @@ function turnOnLamps() {
         })
     })
     .then(r => r.json())
-    .then(data => window.alert(data.message))
+    .then(data => addFeedbacks([data.message]))
 }
 
 function turnOffRelays() {
@@ -26,7 +26,7 @@ function turnOffRelays() {
         })
     })
     .then(r => r.json())
-    .then(data => window.alert(data.message))
+    .then(data => addFeedbacks([data.message]))
 }
 
 function onToogleRelayClick(online, rooom_name, relay_name) {
@@ -42,5 +42,5 @@ function onToogleRelayClick(online, rooom_name, relay_name) {
         })
     })
     .then(r => r.json())
-    .then(data => window.alert(data.message))
+    .then(data => addFeedbacks([data.message]))
 }

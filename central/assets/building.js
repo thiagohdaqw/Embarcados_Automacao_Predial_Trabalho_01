@@ -1,4 +1,6 @@
-document.getElementById('central-server-header').innerText += ` (${window.location.host})`
+baseUrl = window.location.host
+
+document.getElementById('central-server-header').innerText += ` (${baseUrl})`
 
 refreshRateElement = document.getElementById('refresh-rate-input')
 
@@ -26,7 +28,8 @@ function loadBuildingReport() {
         .then(r => r.json())
         .then(data => {
             fillGeneralData(data);
-            fillRoomsData(data.rooms)
+            fillRoomsData(data.rooms);
+            addFeedbacks(data.feedbacks)
         })
 }
 

@@ -15,3 +15,4 @@ def consume_distributed_server_message(data: bytes, building: Building):
 
 def handle_distributed_feedback(data, building):
     building.add_feedback(data['message'])
+

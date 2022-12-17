@@ -2,7 +2,10 @@
 <head>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body> 
+    <div id="notifications" onclick="clearFeedbacks()">
+    </div>
+
 
     <div class="card-container text-center">
         <h1>Trabalho 1 - Fundamentos de Sistemas Embarcados</h1>
@@ -39,7 +42,7 @@
                     <img class="icon" src="icons/persons.png">
                     <p id="general-persons">Pessoas</p>
                 </div>
-                <div class="card-elem clickable">
+                <div class="card-elem clickable" onclick="turnOnLamps()">
                     <div class="card-elem-title">Lâmpadas</div>
                     <img class="icon" src="icons/lamp.png">
                     <p id="general-persons">Ligar lâmpadas</p>
@@ -65,7 +68,8 @@
 
     <div id="rooms"></div>
 
-    <script src="commands.js"></script>
+    <script src="feedbacks.js"></script>
     <script src="building.js"></script>
+    <script src="commands.js"></script>
 </body>
 </html>

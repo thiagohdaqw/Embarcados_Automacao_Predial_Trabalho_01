@@ -6,8 +6,7 @@ from socket import socket, MSG_WAITALL
 from typing import List, Callable
 from central.building.building import Building
 from central.server.socket import Address, create_server_socket
-from central.util.bytes import int_from_bytes, int_to_bytes
-from central.building.command import MessageType
+from central.util.bytes import int_from_bytes
 
 
 ReadableHandler = Callable[[bytes, str, Building], None]

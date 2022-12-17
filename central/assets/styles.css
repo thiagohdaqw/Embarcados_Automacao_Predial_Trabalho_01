@@ -1,6 +1,8 @@
 body {
     background-color: #b0e0e6;
     font-family: 'sans-serif';
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -131,5 +133,32 @@ h3 {
     100% {
         background-color: red;
         box-shadow: 2px 2px 15px 5px red;
+    }
+}
+
+#notifications {
+    position: fixed;
+    right: 0;
+    width: 500px;
+}
+
+.notification {
+    color: white;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+    box-shadow: 0px 0px 10px cyan;
+    background-color: #17a2b8;
+}
+
+.notification-animation {
+    animation-name: notification-start;
+    animation-duration: 1s;
+}
+
+@keyframes notification-start {
+    0% {
+        transform: translateX(5%);
     }
 }

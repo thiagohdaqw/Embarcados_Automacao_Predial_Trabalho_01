@@ -11,24 +11,22 @@ def get_building(body: str, building: Building):
 
 
 def update_lamps(body, building: Building):
-    logging.info(f',update {body["value"]},lamps')
-
-    data = from_json(body)
+    data = from_json(body[0])
 
     building.update_lamps(data['value'])
 
+    logger.info(f',update {data["value"]},lamps')
     return build_json_response({
         'success': True,
         'message': 'O comando para atualizar as lampadas do prédio foi enviado'
     })
 
 def update_relays(body, building: Building):
-    logging.info(f',update {body["value"]},relays')
-
-    data = from_json(body)
+    data = from_json(body[0])
 
     building.update_relays(data['value'])
 
+    logger.info(f',update {data["value"]},relays')
     return build_json_response({
         'success': True,
         'message': 'O comando para atualizar das cargas do prédio foi enviado'
@@ -36,7 +34,7 @@ def update_relays(body, building: Building):
 
 
 def toogle_alarm_system(body, building: Building):
-    logging.info(',toggle,alarm system')
+    logger.info(',toggle,alarm system')
 
     message = ''
     success = True
@@ -58,10 +56,4 @@ def toogle_alarm_system(body, building: Building):
     return build_json_response({
         'success': success,
         'message': message
-    })
-
-
-def get_feedbacks(body, building: Building):
-    return build_json_response({
-        'feedbacks': building.get_feedbacks()
     })

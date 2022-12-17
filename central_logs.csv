@@ -1,0 +1,12 @@
+2022-12-17 11:27:52,343,,enable,alarms
+2022-12-17 11:29:59,128,,disable,alarms
+2022-12-17 11:30:21,491,,enable,alarms
+2022-12-17 11:31:01,989,,enable,alarms
+2022-12-17 11:31:31,642,,update True,lamps
+2022-12-17 11:31:32,939,,update False,relays
+2022-12-17 11:31:33,944,,toggle,alarm system
+2022-12-17 11:31:33,944,,enable,alarms
+2022-12-17 11:31:37,982,,toggle,alarm system
+2022-12-17 11:31:37,982,,disable,alarms
+2022-12-17 11:31:39,182,,update False,relays
+2022-12-17 11:31:40,449,,update True,lamps

@@ -16,7 +16,7 @@ class Building:
     rooms: dict[str, Room]
     connectionsRooms: dict[socket, Room]
 
-    feedbacks: deque
+    feedbacks: list
 
     temperature:    float
     humidity:       int
@@ -200,5 +200,6 @@ class Building:
             'alarm': self.alarm,
             'persons': self.persons,
             'fire': self.fire,
-            'rooms': [room.asdict() for room in self.rooms.values()]
+            'rooms': [room.asdict() for room in self.rooms.values()],
+            'feedbacks': self.get_feedbacks()
         }

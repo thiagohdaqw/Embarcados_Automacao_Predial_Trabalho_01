@@ -28,7 +28,7 @@ class HttpRouter:
         method, resource, request = data.decode('utf-8').split(' ', 2)
 
         if (method, resource) in self.routes:
-            _, body = request.split('\n\n', 1)
+            _, *body = request.split('\n\r\n', 1)
             return self.routes[(method, resource)](body, self.building)
 
         return handle_http_get_static_file(resource)

@@ -9,12 +9,11 @@ logger = logging.getLogger('actions')
 
 
 def toggle_relay(body, building: Building):
-    logger.info(f'{body["room_name"]},toggle,{body["sensor_name"]}')
+    data = from_json(body[0])
     
-    data = from_json(body)
-
     building.toggle_room_relay(data)
 
+    logger.info(f'{data["room_name"]},toggle,{data["sensor_name"]}')
     return build_json_response(
         {
             'success': True,
