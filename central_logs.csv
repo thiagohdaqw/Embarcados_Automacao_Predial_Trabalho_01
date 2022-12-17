@@ -10,3 +10,120 @@
 2022-12-17 11:31:37,982,,disable,alarms
 2022-12-17 11:31:39,182,,update False,relays
 2022-12-17 11:31:40,449,,update True,lamps
+2022-12-17 11:43:27,392,,toggle,alarm system
+2022-12-17 11:43:27,393,,enable,alarms
+2022-12-17 11:43:28,622,,update False,relays
+2022-12-17 11:43:29,710,,update True,lamps
+2022-12-17 11:43:34,517,,update True,lamps
+2022-12-17 11:43:35,255,,update False,relays
+2022-12-17 11:43:35,992,,toggle,alarm system
+2022-12-17 11:43:35,993,,disable,alarms
+2022-12-17 11:43:37,325,,toggle,alarm system
+2022-12-17 11:43:37,326,,enable,alarms
+2022-12-17 11:43:38,921,,update False,relays
+2022-12-17 11:43:40,671,,update True,lamps
+2022-12-17 11:43:41,692,,toggle,alarm system
+2022-12-17 11:43:41,692,,disable,alarms
+2022-12-17 11:43:43,108,,update False,relays
+2022-12-17 11:43:45,840,,update True,lamps
+2022-12-17 11:43:47,102,,update False,relays
+2022-12-17 11:43:48,301,,toggle,alarm system
+2022-12-17 11:43:48,302,,enable,alarms
+2022-12-17 11:43:49,367,,update False,relays
+2022-12-17 11:43:49,733,,update False,relays
+2022-12-17 11:43:49,963,,update False,relays
+2022-12-17 11:43:50,075,,update False,relays
+2022-12-17 11:43:50,194,,update False,relays
+2022-12-17 11:43:50,306,,update False,relays
+2022-12-17 11:43:50,425,,update False,relays
+2022-12-17 11:43:50,538,,update False,relays
+2022-12-17 11:43:50,651,,update False,relays
+2022-12-17 11:43:50,770,,update False,relays
+2022-12-17 11:43:50,888,,update False,relays
+2022-12-17 11:43:51,000,,update False,relays
+2022-12-17 11:43:51,178,,update False,relays
+2022-12-17 11:43:51,865,,update True,lamps
+2022-12-17 11:43:52,632,,update False,relays
+2022-12-17 11:43:53,190,,toggle,alarm system
+2022-12-17 11:43:53,191,,disable,alarms
+2022-12-17 11:43:54,121,,update False,relays
+2022-12-17 11:43:54,866,,update True,lamps
+2022-12-17 11:43:58,114,,toggle,alarm system
+2022-12-17 11:43:58,115,,enable,alarms
+2022-12-17 11:44:01,617,,toggle,alarm system
+2022-12-17 11:44:01,618,,disable,alarms
+2022-12-17 11:44:02,779,,update False,relays
+2022-12-17 11:44:04,201,,update True,lamps
+2022-12-17 11:44:06,319,,update False,relays
+2022-12-17 11:44:07,860,,toggle,alarm system
+2022-12-17 11:44:07,861,,enable,alarms
+2022-12-17 11:44:08,076,,toggle,alarm system
+2022-12-17 11:44:08,077,,disable,alarms
+2022-12-17 11:44:08,210,,toggle,alarm system
+2022-12-17 11:44:08,211,,enable,alarms
+2022-12-17 11:44:08,387,,toggle,alarm system
+2022-12-17 11:44:08,387,,disable,alarms
+2022-12-17 11:44:09,904,,update True,lamps
+2022-12-17 11:44:10,053,,update True,lamps
+2022-12-17 11:44:10,114,,update True,lamps
+2022-12-17 11:44:10,298,,update True,lamps
+2022-12-17 11:44:11,101,,update False,relays
+2022-12-17 11:44:11,186,,update False,relays
+2022-12-17 11:44:11,310,,update False,relays
+2022-12-17 11:44:11,489,,update False,relays
+2022-12-17 11:44:12,012,,toggle,alarm system
+2022-12-17 11:44:12,013,,enable,alarms
+2022-12-17 11:44:12,115,,toggle,alarm system
+2022-12-17 11:44:12,115,,disable,alarms
+2022-12-17 11:44:12,294,,toggle,alarm system
+2022-12-17 11:44:12,295,,enable,alarms
+2022-12-17 11:44:14,745,,toggle,alarm system
+2022-12-17 11:44:14,746,,disable,alarms
+2022-12-17 11:44:17,986,,toggle,alarm system
+2022-12-17 11:44:17,987,,enable,alarms
+2022-12-17 11:44:18,875,,update False,relays
+2022-12-17 11:44:19,552,,update True,lamps
+2022-12-17 11:44:33,732,,update False,relays
+2022-12-17 11:44:34,864,,toggle,alarm system
+2022-12-17 11:44:34,865,,disable,alarms
+2022-12-17 11:44:35,572,,update True,lamps
+2022-12-17 11:47:33,485,,update True,lamps
+2022-12-17 11:47:35,630,,toggle,alarm system
+2022-12-17 11:47:35,631,,enable,alarms
+2022-12-17 11:47:36,546,,toggle,alarm system
+2022-12-17 11:47:36,547,,disable,alarms
+2022-12-17 11:47:37,806,,update False,relays
+2022-12-17 11:47:42,656,,toggle,alarm system
+2022-12-17 11:47:42,657,,enable,alarms
+2022-12-17 11:47:44,908,,update True,lamps
+2022-12-17 11:47:46,031,,toggle,alarm system
+2022-12-17 11:47:46,031,,disable,alarms
+2022-12-17 11:48:06,002,,update False,relays
+2022-12-17 11:48:07,820,,update True,lamps
+2022-12-17 11:48:08,863,,toggle,alarm system
+2022-12-17 11:48:08,863,,enable,alarms
+2022-12-17 11:48:09,884,,update False,relays
+2022-12-17 11:48:14,593,,toggle,alarm system
+2022-12-17 11:48:14,594,,disable,alarms
+2022-12-17 11:48:22,415,,toggle,alarm system
+2022-12-17 11:48:22,416,,enable,alarms
+2022-12-17 11:48:24,396,,update True,lamps
+2022-12-17 11:48:25,082,,update False,relays
+2022-12-17 11:48:27,212,,toggle,alarm system
+2022-12-17 11:48:27,213,,disable,alarms
+2022-12-17 11:49:17,726,,toggle,alarm system
+2022-12-17 11:49:17,726,,enable,alarms
+2022-12-17 11:49:21,011,,update False,relays
+2022-12-17 11:49:40,249,,toggle,alarm system
+2022-12-17 11:49:40,249,,disable,alarms
+2022-12-17 11:49:47,425,,update False,relays
+2022-12-17 11:50:40,503,,update False,relays
+2022-12-17 11:51:22,790,,update True,lamps
+2022-12-17 11:51:24,289,,update False,relays
+2022-12-17 11:51:27,179,,toggle,alarm system
+2022-12-17 11:51:27,179,,enable,alarms
+2022-12-17 11:51:56,645,,update False,relays
+2022-12-17 11:51:58,784,,update True,lamps
+2022-12-17 11:51:59,952,,toggle,alarm system
+2022-12-17 11:51:59,953,,disable,alarms
+2022-12-17 11:52:08,900,,update False,relays

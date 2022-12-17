@@ -1,0 +1,69 @@
+{
+    "nome": "Sala 01",
+    "outputs": [
+        {
+            "name": "lamp01",
+            "tag": "Lâmpada 01",
+            "gpio": 18
+        },
+        {
+            "name": "lamp02",
+            "tag": "Lâmpada 02",
+            "gpio": 23
+        },
+        {
+            "name": "projector",
+            "tag": "Projetor Multimidia",
+            "gpio": 25
+        },
+        {
+            "name": "air_conditioning",
+            "tag": "Ar-Condicionado (1º Andar)",
+            "gpio": 24
+        },
+        {
+            "name": "alarm",
+            "tag": "Sirene do Alarme",
+            "gpio": 8
+        }
+    ],
+    "inputs": [
+        {
+          "name": "presence",
+          "tag": "Sensor de Presença",
+          "gpio": 7
+        },
+        {
+            "name": "smoke",
+            "tag": "Sensor de Fumaça",
+            "gpio": 1
+        },
+        {
+            "name": "window",
+            "tag": "Sensor de Janela",
+            "gpio": 12
+        },
+        {
+            "name": "door",
+            "tag": "Sensor de Porta",
+            "gpio": 16
+        },
+        {
+            "name": "contagem",
+            "tag": "Sensor de Contagem de Pessoas Entrada",
+            "gpio": 20
+        },
+        {
+            "name": "contagem",
+            "tag": "Sensor de Contagem de Pessoas Saída",
+            "gpio": 21
+        }
+    ],
+    "temperature":[
+        {
+          "name": "dth22",
+          "tag": "Sensor de Temperatura e Umidade",
+          "gpio": 4
+        }
+    ]
+}

@@ -16,6 +16,10 @@ function renderFeedbacks(new_count) {
 }
 
 function addFeedbacks(new_feedbacks) {
+    if (new_feedbacks.length === 0) {
+        return;
+    }
+
     feedbacks = feedbacks.slice(feedbacks.length-10, feedbacks.length);
     feedbacks.push(...new_feedbacks);
 
