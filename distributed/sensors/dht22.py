@@ -4,13 +4,13 @@ from queue import Queue
 from functools import partial
 from adafruit_dht import DHT22
 
-from distributed.model.room import RoomGPIO, Room
+from distributed.model.room import Room
 
 
 def init(room: Room, producer_queue: Queue[Room]):
     pin = getattr(board, f'D{room.gpio.dth22}')
 
-    dhtDevice = DHT22(pin)
+    dhtDevice = DHT22(pin, use_pulseio=False)
 
     handler = partial(dht22_handler, dhtDevice=dhtDevice,
                       room=room, producer_queue=producer_queue)
