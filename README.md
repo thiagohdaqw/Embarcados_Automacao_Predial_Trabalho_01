@@ -45,5 +45,8 @@ $ make run-distributed DISTRIBUTED_CONFIG_JSON_FILE=<configuracao_sala_x.json>
 
 ### Funcionamento
 
+[![Video do Funcionamento](https://img.youtube.com/vi/-Ar7zaVj9zM/0.jpg)](https://www.youtube.com/watch?v=-Ar7zaVj9zM)
+
 ### Código
 
+[![Video do Código](https://img.youtube.com/vi/PCl_i0JPqw0/0.jpg)](https://www.youtube.com/watch?v=PCl_i0JPqw0)
