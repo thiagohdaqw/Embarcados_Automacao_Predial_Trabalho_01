@@ -27671,3 +27671,250 @@
 2022-12-17 18:34:50,328,,disable,alarms
 2022-12-17 18:34:50,329,,liberated,smoke
 2022-12-17 20:37:33,203,,update False,relays
+2022-12-18 08:02:22,032,Sala 02,toggle,alarm
+2022-12-18 08:07:19,879,Sala 02,toggle,alarm
+2022-12-18 08:07:30,759,,toggle,alarm system
+2022-12-18 08:07:38,041,Sala 02,toggle,alarm
+2022-12-18 08:07:43,305,Sala 02,toggle,alarm
+2022-12-18 08:07:47,744,Sala 03,toggle,alarm
+2022-12-18 08:07:51,352,Sala 04,toggle,alarm
+2022-12-18 08:08:03,602,,update False,relays
+2022-12-18 08:10:46,736,,update False,relays
+2022-12-18 08:10:46,803,,feedback,lamp01 relay disabled with success
+2022-12-18 08:10:46,804,,feedback,lamp01 relay disabled with success
+2022-12-18 08:10:46,804,,feedback,lamp02 relay disabled with success
+2022-12-18 08:10:46,825,,feedback,lamp02 relay disabled with success
+2022-12-18 08:10:46,826,,feedback,lamp01 relay disabled with success
+2022-12-18 08:10:46,827,,feedback,lamp01 relay disabled with success
+2022-12-18 08:10:46,827,,feedback,projector relay disabled with success
+2022-12-18 08:10:46,828,,feedback,projector relay disabled with success
+2022-12-18 08:10:46,828,,feedback,lamp02 relay disabled with success
+2022-12-18 08:10:46,829,,feedback,lamp02 relay disabled with success
+2022-12-18 08:10:46,830,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:10:46,830,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:10:46,830,,feedback,projector relay disabled with success
+2022-12-18 08:10:46,831,,feedback,projector relay disabled with success
+2022-12-18 08:10:46,831,,feedback,alarm relay disabled with success
+2022-12-18 08:10:46,831,,feedback,alarm relay disabled with success
+2022-12-18 08:10:46,832,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:10:46,832,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:10:46,832,,feedback,alarm relay disabled with success
+2022-12-18 08:10:46,832,,feedback,alarm relay disabled with success
+2022-12-18 08:15:05,062,,update True,lamps
+2022-12-18 08:15:05,128,,feedback,lamp01 relay enabled with success
+2022-12-18 08:15:05,129,,feedback,lamp02 relay enabled with success
+2022-12-18 08:15:05,135,,feedback,lamp01 relay enabled with success
+2022-12-18 08:15:05,161,,feedback,lamp02 relay enabled with success
+2022-12-18 08:15:18,376,Sala 02,toggle,projector
+2022-12-18 08:15:18,442,,feedback,projector relay enabled with success
+2022-12-18 08:15:19,567,Sala 02,toggle,air_conditioning
+2022-12-18 08:15:19,634,,feedback,air_conditioning relay enabled with success
+2022-12-18 08:15:25,871,,update False,relays
+2022-12-18 08:15:25,939,,feedback,lamp01 relay disabled with success
+2022-12-18 08:15:25,941,,feedback,lamp02 relay disabled with success
+2022-12-18 08:15:25,941,,feedback,lamp01 relay disabled with success
+2022-12-18 08:15:25,942,,feedback,projector relay disabled with success
+2022-12-18 08:15:25,943,,feedback,lamp02 relay disabled with success
+2022-12-18 08:15:25,943,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:15:25,944,,feedback,projector relay disabled with success
+2022-12-18 08:15:25,944,,feedback,alarm relay disabled with success
+2022-12-18 08:15:25,944,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:15:25,944,,feedback,alarm relay disabled with success
+2022-12-18 08:15:52,452,Sala 02,toggle,alarm
+2022-12-18 08:15:52,521,,feedback,alarm relay enabled with success
+2022-12-18 08:15:54,715,Sala 02,toggle,alarm
+2022-12-18 08:15:54,779,,feedback,alarm relay disabled with success
+2022-12-18 08:16:03,296,Sala 02,toggle,alarm
+2022-12-18 08:16:03,347,,feedback,alarm relay enabled with success
+2022-12-18 08:16:04,639,Sala 02,toggle,alarm
+2022-12-18 08:16:04,706,,feedback,alarm relay disabled with success
+2022-12-18 08:16:05,708,Sala 02,toggle,alarm
+2022-12-18 08:16:05,774,,feedback,alarm relay enabled with success
+2022-12-18 08:16:10,084,,toggle,alarm system
+2022-12-18 08:16:21,298,Sala 02,toggle,alarm
+2022-12-18 08:16:21,346,,feedback,alarm relay disabled with success
+2022-12-18 08:16:28,237,,toggle,alarm system
+2022-12-18 08:16:28,237,,enable,alarms
+2022-12-18 08:16:39,212,,detected,intrusion
+2022-12-18 08:16:39,275,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,276,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,292,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,303,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,325,,detected,intrusion
+2022-12-18 08:16:39,397,,detected,intrusion
+2022-12-18 08:16:39,399,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,422,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,465,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,490,,feedback,alarm relay enabled with success
+2022-12-18 08:16:39,929,,detected,intrusion
+2022-12-18 08:16:40,389,,detected,intrusion
+2022-12-18 08:16:40,953,,detected,intrusion
+2022-12-18 08:16:41,362,,detected,intrusion
+2022-12-18 08:16:41,390,,detected,intrusion
+2022-12-18 08:16:41,977,,detected,intrusion
+2022-12-18 08:16:42,392,,detected,intrusion
+2022-12-18 08:16:43,001,,detected,intrusion
+2022-12-18 08:16:43,324,,detected,intrusion
+2022-12-18 08:16:43,392,,detected,intrusion
+2022-12-18 08:16:43,923,,detected,intrusion
+2022-12-18 08:16:44,435,,detected,intrusion
+2022-12-18 08:16:44,946,,detected,intrusion
+2022-12-18 08:16:45,356,,detected,intrusion
+2022-12-18 08:16:45,393,,detected,intrusion
+2022-12-18 08:16:45,971,,detected,intrusion
+2022-12-18 08:16:46,396,,detected,intrusion
+2022-12-18 08:16:46,994,,detected,intrusion
+2022-12-18 08:16:47,404,,detected,intrusion
+2022-12-18 08:16:47,405,,detected,intrusion
+2022-12-18 08:16:47,916,,detected,intrusion
+2022-12-18 08:16:48,428,,detected,intrusion
+2022-12-18 08:16:48,898,,detected,intrusion
+2022-12-18 08:16:49,349,,detected,intrusion
+2022-12-18 08:16:49,397,,detected,intrusion
+2022-12-18 08:16:49,964,,detected,intrusion
+2022-12-18 08:16:50,398,,detected,intrusion
+2022-12-18 08:16:50,988,,detected,intrusion
+2022-12-18 08:16:51,397,,detected,intrusion
+2022-12-18 08:16:51,399,,detected,intrusion
+2022-12-18 08:16:51,909,,detected,intrusion
+2022-12-18 08:16:52,400,,detected,intrusion
+2022-12-18 08:16:52,933,,detected,intrusion
+2022-12-18 08:16:53,344,,detected,intrusion
+2022-12-18 08:16:53,406,,detected,intrusion
+2022-12-18 08:16:53,957,,detected,intrusion
+2022-12-18 08:16:54,470,,detected,intrusion
+2022-12-18 08:16:54,982,,detected,intrusion
+2022-12-18 08:16:55,391,,detected,intrusion
+2022-12-18 08:16:55,403,,detected,intrusion
+2022-12-18 08:16:56,006,,detected,intrusion
+2022-12-18 08:16:56,415,,detected,intrusion
+2022-12-18 08:16:56,904,,detected,intrusion
+2022-12-18 08:16:57,338,,detected,intrusion
+2022-12-18 08:16:57,404,,detected,intrusion
+2022-12-18 08:16:57,906,,detected,intrusion
+2022-12-18 08:16:58,406,,detected,intrusion
+2022-12-18 08:16:58,975,,detected,intrusion
+2022-12-18 08:16:59,385,,detected,intrusion
+2022-12-18 08:16:59,407,,detected,intrusion
+2022-12-18 08:16:59,999,,detected,intrusion
+2022-12-18 08:17:00,409,,detected,intrusion
+2022-12-18 08:17:00,921,,detected,intrusion
+2022-12-18 08:17:01,330,,detected,intrusion
+2022-12-18 08:17:01,409,,detected,intrusion
+2022-12-18 08:17:01,473,,toggle,alarm system
+2022-12-18 08:17:01,474,,disable,alarms
+2022-12-18 08:17:01,540,,feedback,alarm relay disabled with success
+2022-12-18 08:17:01,540,,feedback,alarm relay disabled with success
+2022-12-18 08:19:07,699,Sala 02,toggle,lamp01
+2022-12-18 08:19:07,767,,feedback,lamp01 relay enabled with success
+2022-12-18 08:19:09,228,Sala 02,toggle,lamp02
+2022-12-18 08:19:09,313,,feedback,lamp02 relay enabled with success
+2022-12-18 08:19:10,356,Sala 02,toggle,air_conditioning
+2022-12-18 08:19:10,404,,feedback,air_conditioning relay enabled with success
+2022-12-18 08:19:11,627,Sala 02,toggle,projector
+2022-12-18 08:19:11,694,,feedback,projector relay enabled with success
+2022-12-18 08:19:22,335,Sala 03,toggle,projector
+2022-12-18 08:19:22,445,,feedback,projector relay enabled with success
+2022-12-18 08:19:29,890,,update False,relays
+2022-12-18 08:19:29,921,,feedback,lamp01 relay disabled with success
+2022-12-18 08:19:29,922,,feedback,lamp02 relay disabled with success
+2022-12-18 08:19:29,923,,feedback,projector relay disabled with success
+2022-12-18 08:19:29,924,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:19:29,925,,feedback,alarm relay disabled with success
+2022-12-18 08:19:29,993,,feedback,lamp01 relay disabled with success
+2022-12-18 08:19:29,994,,feedback,lamp02 relay disabled with success
+2022-12-18 08:19:29,994,,feedback,projector relay disabled with success
+2022-12-18 08:19:29,995,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:19:29,996,,feedback,alarm relay disabled with success
+2022-12-18 08:19:38,158,,update True,lamps
+2022-12-18 08:19:38,225,,feedback,lamp01 relay enabled with success
+2022-12-18 08:19:38,225,,feedback,lamp02 relay enabled with success
+2022-12-18 08:19:38,238,,feedback,lamp01 relay enabled with success
+2022-12-18 08:19:38,248,,feedback,lamp02 relay enabled with success
+2022-12-18 08:19:43,821,,update False,relays
+2022-12-18 08:19:43,887,,feedback,lamp01 relay disabled with success
+2022-12-18 08:19:43,888,,feedback,lamp02 relay disabled with success
+2022-12-18 08:19:43,889,,feedback,lamp01 relay disabled with success
+2022-12-18 08:19:43,889,,feedback,projector relay disabled with success
+2022-12-18 08:19:43,890,,feedback,lamp02 relay disabled with success
+2022-12-18 08:19:43,890,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:19:43,891,,feedback,projector relay disabled with success
+2022-12-18 08:19:43,892,,feedback,alarm relay disabled with success
+2022-12-18 08:19:43,892,,feedback,air_conditioning relay disabled with success
+2022-12-18 08:19:43,893,,feedback,alarm relay disabled with success
+2022-12-18 08:19:56,298,,detected,smoke
+2022-12-18 08:19:56,365,,feedback,alarm relay enabled with success
+2022-12-18 08:19:56,365,,feedback,alarm relay enabled with success
+2022-12-18 08:19:56,416,,feedback,alarm relay enabled with success
+2022-12-18 08:19:56,417,,feedback,alarm relay enabled with success
+2022-12-18 08:20:07,500,,toggle,alarm system
+2022-12-18 08:20:16,983,,disable,alarms
+2022-12-18 08:20:16,983,,liberated,smoke
+2022-12-18 08:20:17,091,,feedback,alarm relay disabled with success
+2022-12-18 08:20:17,092,,feedback,alarm relay disabled with success
+2022-12-18 08:20:29,582,,feedback,lamps were enabled with success for 15 seconds
+2022-12-18 08:20:49,181,,feedback,lamps were enabled with success for 15 seconds
+2022-12-18 08:33:40,419,,feedback,lamps were enabled with success for 15 seconds
+2022-12-18 08:34:10,443,,feedback,lamps were enabled with success for 15 seconds
+2022-12-18 08:34:29,550,,toggle,alarm system
+2022-12-18 08:34:29,551,,enable,alarms
+2022-12-18 08:34:45,596,,toggle,alarm system
+2022-12-18 08:34:45,597,,disable,alarms
+2022-12-18 08:34:45,664,,feedback,alarm relay disabled with success
+2022-12-18 08:34:45,666,,feedback,alarm relay disabled with success
+2022-12-18 08:34:48,014,,toggle,alarm system
+2022-12-18 08:34:48,015,,enable,alarms
+2022-12-18 08:35:08,454,,toggle,alarm system
+2022-12-18 08:35:08,456,,disable,alarms
+2022-12-18 08:35:08,521,,feedback,alarm relay disabled with success
+2022-12-18 08:35:08,536,,feedback,alarm relay disabled with success
+2022-12-18 08:35:21,888,,toggle,alarm system
+2022-12-18 08:35:21,889,,enable,alarms
+2022-12-18 08:35:33,472,,detected,intrusion
+2022-12-18 08:35:33,520,,detected,intrusion
+2022-12-18 08:35:33,543,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,544,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,544,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,545,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,587,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,588,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,607,,feedback,alarm relay enabled with success
+2022-12-18 08:35:33,608,,feedback,alarm relay enabled with success
+2022-12-18 08:35:34,021,,detected,intrusion
+2022-12-18 08:35:34,417,,detected,intrusion
+2022-12-18 08:35:34,533,,detected,intrusion
+2022-12-18 08:35:35,044,,detected,intrusion
+2022-12-18 08:35:35,557,,detected,intrusion
+2022-12-18 08:35:36,069,,detected,intrusion
+2022-12-18 08:35:36,417,,detected,intrusion
+2022-12-18 08:35:36,581,,detected,intrusion
+2022-12-18 08:35:37,093,,detected,intrusion
+2022-12-18 08:35:37,526,,detected,intrusion
+2022-12-18 08:35:38,026,,detected,intrusion
+2022-12-18 08:35:38,425,,detected,intrusion
+2022-12-18 08:35:38,609,,detected,intrusion
+2022-12-18 08:35:39,025,,detected,intrusion
+2022-12-18 08:35:39,550,,detected,intrusion
+2022-12-18 08:35:40,062,,detected,intrusion
+2022-12-18 08:35:40,416,,detected,intrusion
+2022-12-18 08:35:40,574,,detected,intrusion
+2022-12-18 08:35:41,087,,detected,intrusion
+2022-12-18 08:35:41,599,,detected,intrusion
+2022-12-18 08:35:42,110,,detected,intrusion
+2022-12-18 08:35:42,521,,detected,intrusion
+2022-12-18 08:35:42,530,,detected,intrusion
+2022-12-18 08:35:43,135,,detected,intrusion
+2022-12-18 08:35:43,544,,detected,intrusion
+2022-12-18 08:35:44,056,,detected,intrusion
+2022-12-18 08:35:44,417,,detected,intrusion
+2022-12-18 08:35:44,568,,detected,intrusion
+2022-12-18 08:35:45,080,,detected,intrusion
+2022-12-18 08:35:45,592,,detected,intrusion
+2022-12-18 08:35:46,032,,detected,intrusion
+2022-12-18 08:35:46,513,,detected,intrusion
+2022-12-18 08:35:46,533,,detected,intrusion
+2022-12-18 08:35:47,128,,detected,intrusion
+2022-12-18 08:35:47,626,,toggle,alarm system
+2022-12-18 08:35:47,628,,disable,alarms
+2022-12-18 08:35:47,654,,feedback,alarm relay disabled with success
+2022-12-18 08:35:47,694,,feedback,alarm relay disabled with success

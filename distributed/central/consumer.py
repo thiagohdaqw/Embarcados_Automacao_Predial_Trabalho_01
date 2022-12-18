@@ -29,4 +29,4 @@ def read_or_exit(conn, length):
         print('Connection with Central Server were lost')
         os._exit(1)
 
-    return
+    return data
