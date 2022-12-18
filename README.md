@@ -32,7 +32,11 @@ $ make run-central
 # Acesso e tunelamento
 $ ssh ssh -R 10711:127.0.0.1:10711 <usuario>@<ip_sala> -p 13508
 
-# Na pasta raiz do projeto inicie o distribuido passado o seu arquivo de configuracao
+# Na pasta raiz do projeto instale as dependencias
+$ make install
+
+
+# Inicie o distribuido passado o seu arquivo de configuracao
 $ make run-distributed DISTRIBUTED_CONFIG_JSON_FILE=<configuracao_sala_x.json>
 
 ```
